@@ -1,0 +1,8 @@
+fastapi==0.108.0
+uvicorn[standard]==0.25.0
+bcrypt==4.1.2
+httpx==0.26.0 # para usar "TestClient" de FastAPI
+pytest==8.0.0
+python-multipart==0.0.9 # para usar form data en OAuth2
+python-jose[cryptography]==3.3.0
+pymongo[srv]==4.6.1
