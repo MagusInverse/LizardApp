@@ -56,28 +56,52 @@ def crear_jwt(data: dict, expires_delta: timedelta = None):
 # Ruta para obtener un token de autenticación (login)
 @router.post("/token")
 async def login(bdd: dependencia_bdd, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
-	"""
-    Este endpoint se utiliza para que el usuario pueda obtener un token de autenticación y acceder a los endpoints protegidos
-	"""
+    """
+    Autentica a un usuario y genera un token de acceso tipo JWT.
 
-	usuario = validar_usuario(form_data.username, form_data.password, bdd)
-	if not usuario:
-		raise HTTPException(
-            status_code=401,
-            detail="nombre de usuario o contraseña incorrectos",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-	token_expiracion = timedelta(minutes=TOKEN_EXPIRACION_MINUTOS)
-	token = crear_jwt(
-        data={"sub": usuario}, expires_delta=token_expiracion
-    )
-	return Token(access_token=token, token_type="bearer")
+    Este endpoint recibe las credenciales del usuario (nombre de usuario y contraseña),
+    verifica estas credenciales contra una base de datos (bdd) y, si son correctas,
+    retorna un token JWT que el usuario puede utilizar para autenticarse en futuras
+    solicitudes a endpoints protegidos.
+
+    Parámetros:
+    - form_data (OAuth2PasswordRequestForm): Formulario que contiene el nombre de usuario y la contraseña.
+
+    Respuestas:
+    - 200: Retorna un objeto Token que contiene el token de acceso JWT y el tipo de token
+    - 401: Error que se lanza si el nombre de usuario o la contraseña son incorrectos.
+      Esta excepción incluye un encabezado 'WWW-Authenticate' con el valor 'Bearer' para indicar
+      el esquema de autenticación.
+    """
+
+    usuario = validar_usuario(form_data.username, form_data.password, bdd)
+    if not usuario:
+        raise HTTPException(
+                status_code=401,
+                detail="nombre de usuario o contraseña incorrectos",
+                headers={"WWW-Authenticate": "Bearer"},
+                )
+    token_expiracion = timedelta(minutes=TOKEN_EXPIRACION_MINUTOS)
+    token = crear_jwt(
+            data={"sub": usuario}, expires_delta=token_expiracion
+            )
+    return Token(access_token=token, token_type="bearer")
 
 # endpoint para registrar un usuario
 @router.post("/registro")
 async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
     """
-    Este endpoint se utiliza para registrar un usuario en la base de datos
+    Registra un nuevo usuario en la base de datos. Se encarga de verificar que el nombre de usuario
+    no esté previamente registrado, cifra la contraseña y almacena los datos del usuario junto con una
+    nueva colección asociada para el usuario en la base de datos.
+
+    Parámetros:
+    - user (UsuarioRegistro, body): Objeto de tipo UsuarioRegistro que contiene los datos del usuario a registrar (username, password y email).
+
+    Respuestas:
+    - 200: Usuario registrado correctamente, retorna el ID del usuario.
+    - 409: Conflicto, el nombre de usuario ya existe en la base de datos.
+    - 500: Error interno del servidor, fallo al registrar el usuario.
     """
 
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
