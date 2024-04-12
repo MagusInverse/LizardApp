@@ -7,7 +7,7 @@ class ConfiguracionOauth2(Enum):
         "SECRET_KEY_OAUTH2") is None else os.environ.get("SECRET_KEY_OAUTH2")
     ALGORITMO_ENCRIPTADO = "HS256"
     TOKEN_EXPIRACION_MINUTOS = 0 if os.environ.get(
-        "PRODUCTION") == "True" else 1
+        "PRODUCTION") == "True" else 60
     TOKEN_EXPIRACION_DIAS = 7 if os.environ.get(
         "PRODUCTION") == "True" else 0
 
