@@ -7,7 +7,7 @@ from jose import JWTError, jwt
 import bcrypt
 
 #importar modelos
-from app.modelos.modelo_usuarios import UsuarioRegistro
+from app.modelos.modelo_usuarios import UsuarioRegistro, ColeccionUsuario
 from app.modelos.modelo_autenticacion import Token, TokenData, User
 
 #Constantes para JWT
@@ -82,16 +82,24 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
 
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
     coleccion_usuarios = bdd["usuarios"]
+    coleccion_colecciones = bdd["colecciones"]
 
     # validate user if exists
     usuario_encontrado = coleccion_usuarios.find_one({ "username": user.username })
     if usuario_encontrado:
         raise HTTPException(status_code=409, detail="El usuario ya existe en la base de datos")
+    resultado = coleccion_colecciones.insert_one(ColeccionUsuario(
+        videojuegos=[], cartas=[], armas=[], figuras=[], libros=[]).model_dump())
+    #obtener el id de la colección creada
+    id_coleccion = resultado.inserted_id
     coleccion_usuarios.insert_one(
             {"username": user.username,
              "hashed_password": hashed_password.decode('utf-8'),
              "email": user.email,
-             "coleccion": user.coleccion.model_dump(),
+             "coleccion": {
+                "$ref": "colecciones",
+                "$id": id_coleccion,
+                 },
              "fecha_registro": user.fecha_registro
              })
 
