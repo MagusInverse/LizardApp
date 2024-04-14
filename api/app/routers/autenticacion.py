@@ -101,6 +101,7 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
     Respuestas:
     - 200: Usuario registrado correctamente, retorna el ID del usuario.
     - 409: Conflicto, el nombre de usuario ya existe en la base de datos.
+    - 422: Error en la validación de los datos del usuario, no cumple con las restricciones de longitud o formato.
     - 500: Error interno del servidor, fallo al registrar el usuario.
     """
 
