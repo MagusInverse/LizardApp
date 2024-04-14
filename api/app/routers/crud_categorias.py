@@ -2,6 +2,7 @@ from fastapi import HTTPException, APIRouter
 
 #importar utilidades para la base de datos mongo
 from bson import ObjectId
+from .utils import convertir_id_a_str
 
 #importar dependencias para validar el token
 from fastapi import Depends
@@ -56,10 +57,13 @@ async def obtener_items_coleccion(usuario_conectado: dependencia_autenticacion, 
     id_colecciones = respuesta['coleccion'].id
 
     if categoria == "all":
-        return coleccion_colecciones.find_one({"_id": ObjectId(id_colecciones)}, {"_id": 0})
+        todas_las_categorias = coleccion_colecciones.find_one({"_id": ObjectId(id_colecciones)}, {"_id": 0})
+        return convertir_id_a_str(todas_las_categorias)
 
     else: # retornar solo la categoria especificada
-        categoria_especifica = coleccion_colecciones.find_one({"_id": ObjectId(id_colecciones)}, {f"{categoria}": 1, "_id": 0})
+        categoria_especifica = coleccion_colecciones.find_one({"_id": ObjectId(id_colecciones)},
+                                                              {f"{categoria}": 1, "_id": 0})
+        categoria_especifica = convertir_id_a_str(categoria_especifica)
 
         if f"{categoria}" in categoria_especifica:
             return categoria_especifica

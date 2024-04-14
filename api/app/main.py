@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import autenticacion, crud_libros, crud_categorias
+from .routers import autenticacion, crud_categorias, crud_items
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -16,7 +16,7 @@ app.add_middleware(
 
 #incluir los endpoints de los routers
 app.include_router(autenticacion.router) # endpoints para autenticacion y registro de usuarios
-app.include_router(crud_libros.router) # endpoints para CRUD de libros
+app.include_router(crud_items.router) # endpoints para CRUD de items
 app.include_router(crud_categorias.router) # endpoints para CRUD de categorias
 
 @app.get("/")
