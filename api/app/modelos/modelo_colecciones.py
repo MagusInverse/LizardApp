@@ -5,47 +5,53 @@ from pydantic import BaseModel, ConfigDict, Field, GetJsonSchemaHandler
 from pydantic.json_schema import JsonSchemaValue
 from pydantic_core import core_schema
 
+from pydantic import Field
+from datetime import date
 
-class ItemCreate(
-        BaseModel):  # poner aqui los atributos comunes (excepto el id, ese va en el modelo "Item")
-    fecha_adquisicion: str
 
-# modelos para usar de body en las peticiones de insercion ya que no se
-# necesita el _id
+class ItemCreate(BaseModel):  # poner aqui los atributos comunes (excepto el id, ese va en el modelo "Item")
+    fecha_adquisicion: date # formato: YYYY-MM-DD
+    url_foto: str
+    nombre: str
+    tipo: str
+    descripcion: str
+
+# modelos para usar de body en las peticiones de inserción ya que no se necesita el _id
 
 
 class LibroCreate(ItemCreate):
-    titulo: str
     autor: str
     editorial: str
     genero: str
-    idioma: str
     edicion: str
     isbn: str
     paginas: int
+    anio_publicacion: int
 
 
 class FiguraCreate(ItemCreate):
-    nombre: str
-    marca: str
-    modelo: str
+    origen: str
+    tamano: str
+    material: str
+    empresa: str
 
 
 class ArmaCreate(ItemCreate):
-    nombre: str
-    tipo: str
-    calibre: str
+    material: str
+    tamano: str
+    peso: float
+    fabricante: str
 
 
 class CartaCreate(ItemCreate):
-    nombre: str
-    tipo: str
+    juego: str
 
 
 class VideojuegoCreate(ItemCreate):
-    nombre: str
     plataforma: str
     genero: str
+    creador: str
+    caracteristicas: str
 
 # Modelos para convertir con _id para mongo
 # Modelos para usar en endpoints de insercion(para generar _id)
