@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr
-import datetime
+from datetime import datetime, timezone
 from .modelo_colecciones import Libro, Figura, Arma, Carta, Videojuego
 from typing import List
 from app.configuracion import ConfiguracionModeloConstraints
@@ -22,5 +22,5 @@ class UsuarioRegistro(BaseModel):
                           max_length=ConfiguracionModeloConstraints.largo_maximo_password.value,
                           pattern=ConfiguracionModeloConstraints.password_regex.value)
     email: EmailStr
-    fecha_registro: datetime.datetime = datetime.datetime.now(
-        tz=datetime.timezone.utc)
+    fecha_registro: datetime = Field(default_factory=lambda: datetime.now(tz=timezone.utc))
+
