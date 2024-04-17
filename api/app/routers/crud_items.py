@@ -180,10 +180,12 @@ async def actualizar_item(item: dict, usuario_conectado: dependencia_autenticaci
     """
     Actualiza la información de un item específico en la colección del usuario autenticado.
 
-    Este endpoint es capaz de entender a qué categoria pertenece el item y actualizarlo en la base de datos gracias al analisis de metadatos del item que se desea actualizar.
+    Este endpoint es capaz de entender a qué categoria pertenece el item y actualizarlo en la base de datos gracias a la recopilación de metadatos del item que se desea actualizar.
+
+    El item a actualizar se identifica por el atributo "_id" que se debe enviar en el json del item.
 
     Parámetros:
-    - item (json): El objeto item se debe enviar en formato JSON en el cuerpo de la solicitud PUT. Que debe incluir todos los atributos espeficos del modelo de datos de la categoria a actualizar. Solo se actualizaran los atributos que hayan tenido cambios. No se modificaran los atributos no modificables tales como el "_id" o el "isbn" (igualmente deben ser enviados en el json para validar el modelo). Hay casos en los que no es necesario enviar el "_id" del item a actualizar, pero es recomendable enviarlo siempre para evitar complicaciones de codigo por parte del front-end, simplemente enviar todos los atributos del item en todas las solicitudes es lo más recomendable.
+    - item (json): El objeto item se debe enviar en formato JSON en el cuerpo de la solicitud PUT. Que debe incluir todos los atributos espeficos del modelo de datos de la categoria a actualizar. Solo se actualizaran los atributos que hayan tenido cambios. No se modificaran los atributos no modificables tales como el "_id" o el "isbn" (igualmente es requerido que sean enviados en el json para validar el modelo). Simplemente enviar todos los atributos del item.
 
     Encabezados requeridos:
     - Authorization (str): Token de acceso del tipo "Bearer" requerido para autenticar la solicitud. Debe ser incluido en el encabezado de la solicitud como "Authorization: Bearer \<token\>".
@@ -192,17 +194,17 @@ async def actualizar_item(item: dict, usuario_conectado: dependencia_autenticaci
     - 200: Retorna un objeto JSON con el mensaje de éxito, indicando que el item ha sido actualizado correctamente.
     - 400: Retorna un objeto JSON con el mensaje de que no se encontraron cambios en los atributos a actualizar.
     - 401: No autorizado - Autenticación fallida o no proporcionada. Se devuelve cuando el usuario no está autenticado o si el token de autenticación es inválido.
-    - 404: No encontrado - Se devuelve cuando el item con el atributo validador (por ejemplo el id o el isbn) no existe en la colección del usuario.
-    - 422: Entidad no procesable - Se devuelve cuando los atributos del item no cumplen con el modelo de datos de la API o el atributo validador de la existencia del item en la base de datos no fué enviado por parte del cliente (por ejemplo, no se envió el id).
+    - 404: No encontrado - Se devuelve cuando el item  no existe en la colección del usuario en base al _id proporcionado.
+    - 422: Entidad no procesable - Se devuelve cuando los atributos del item no cumplen con el modelo de datos de la API o el _id no fue enviado en el json del item.
     """
     # obtener los metadatos del item
-    objeto_valido, nombre_categoria, atributo_validador_existencia, contiene_id, atributos_no_modificables, clase_categoria = obtener_metadatos_item(item)
+    objeto_valido, nombre_categoria, contiene_id, atributos_no_modificables, clase_categoria = obtener_metadatos_item(item)
 
     if not objeto_valido:
-        raise HTTPException(status_code=422, detail=f"El item no cumple con los atributos de ningun modelo de datos de las categorias, asegurese de que el item tenga los atributos correctos para la categoria a la que pertece")
-    # para poder actualizar el item, se debe enviar el _id o el atributo que valida la existencia
-    if atributo_validador_existencia not in item.keys(): # se puede dar cuando el atributo validador es el _id y no se envia el _id
-        raise HTTPException(status_code=422, detail=f"El item enviado no contiene el atributo '{atributo_validador_existencia}' que valida la existencia del item que se desea actualizar para la categoria '{nombre_categoria}'")
+        raise HTTPException(status_code=422, detail=f"El item no cumple con los atributos de ningun modelo de datos de las categorias, asegurese de que el item tenga los atributos correctos para la categoria a la que pertenece")
+    # para poder actualizar el item, se debe enviar el _id del item en el json
+    if "_id" not in item.keys(): # se puede dar cuando no se envia el _id en el json
+        raise HTTPException(status_code=422, detail=f"El item enviado no contiene el atributo '_id' que sirve para identificar el item que se desea actualizar para la categoria '{nombre_categoria}'")
 
     coleccion_usuarios = bdd["usuarios"]
     coleccion_colecciones = bdd["colecciones"]
@@ -211,17 +213,11 @@ async def actualizar_item(item: dict, usuario_conectado: dependencia_autenticaci
     respuesta = coleccion_usuarios.find_one({"username": usuario_conectado.username}, {"coleccion": 1})
     id_colecciones = respuesta['coleccion'].id
 
-    atributo_validador = None
-    if atributo_validador_existencia == "_id":
-        atributo_validador = ObjectId(item["_id"])
-    else:
-        atributo_validador = item[atributo_validador_existencia]
-
     # Buscar item con el id proporcionado
     item_buscado = coleccion_colecciones.find_one(
         {
             "_id": ObjectId(id_colecciones),
-            f"{nombre_categoria}.{atributo_validador_existencia}": atributo_validador
+            f"{nombre_categoria}._id": ObjectId(item["_id"])
         },
         {f"{nombre_categoria}.$": 1}
     )
@@ -233,27 +229,27 @@ async def actualizar_item(item: dict, usuario_conectado: dependencia_autenticaci
 
         # Realizar una única operación de actualización
         resultado = coleccion_colecciones.update_one(
-            {"_id": ObjectId(id_colecciones), f"{nombre_categoria}.{atributo_validador_existencia}": atributo_validador},
+            {"_id": ObjectId(id_colecciones), f"{nombre_categoria}._id": ObjectId(item["_id"])},
             {"$set": actualizacion}
         )
 
         if resultado.modified_count:
-            return {"mensaje": f"El item con {atributo_validador_existencia} '{atributo_validador}' de la categoria '{nombre_categoria}' ha sido actualizado exitosamente"}
+            return {"mensaje": f"El item con _id '{item['_id']}' de la categoria '{nombre_categoria}' ha sido actualizado exitosamente"}
         else:
-            raise HTTPException(status_code=400, detail=f"El item con {atributo_validador_existencia} '{atributo_validador}' de la categoria '{nombre_categoria}' no fue actualizado porque no se encontraron cambios en los atributos modificables")
+            raise HTTPException(status_code=400, detail=f"El item con _id '{item['_id']}' de la categoria '{nombre_categoria}' no fue actualizado porque no se encontraron cambios en los atributos modificables")
     else:
         # Si el libro no existe, retornar un mensaje de error
-        raise HTTPException(status_code=404, detail=f"El item con {atributo_validador_existencia} '{atributo_validador}' de la categoria '{nombre_categoria}' no existe en la colección")
+        raise HTTPException(status_code=404, detail=f"El item con _id '{item['_id']}' de la categoria '{nombre_categoria}' no existe en la colección")
 
 @router.post("/insertar/item/", status_code=200)
 async def insertar_item(item: dict, usuario_conectado: dependencia_autenticacion, bdd: dependencia_bdd):
     """
     Inserta un item específico en la colección del usuario autenticado.
 
-    Este endpoint es capaz de entender a qué categoria pertenece el item y actualizarlo en la base de datos gracias al analisis de metadatos del item que se desea actualizar.
+    Este endpoint es capaz de entender a qué categoria pertenece el item y insertarlo en la base de datos gracias a la recopilación de metadatos del item que se desea insertar.
 
     Parámetros:
-    - item (json): El objeto item se debe enviar en formato JSON en el cuerpo de la solicitud POST. Que debe incluir todos los atributos espeficos del modelo de datos de la categoria del item a insertar.
+    - item (json): El objeto item se debe enviar en formato JSON en el cuerpo de la solicitud POST. Que debe incluir todos los atributos espeficos del modelo de datos de la categoria del item a insertar. No se debe enviar el atributo "_id" ya que se generará automáticamente al insertar el item.
 
     Encabezados requeridos:
     - Authorization (str): Token de acceso del tipo "Bearer" requerido para autenticar la solicitud. Debe ser incluido en el encabezado de la solicitud como "Authorization: Bearer \<token\>".
