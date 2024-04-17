@@ -6,11 +6,11 @@ from pydantic.json_schema import JsonSchemaValue
 from pydantic_core import core_schema
 
 from pydantic import Field
-from datetime import date
+from datetime import datetime
 
 
 class ItemCreate(BaseModel):  # poner aqui los atributos comunes (excepto el id, ese va en el modelo "Item")
-    fecha_adquisicion: date # formato: YYYY-MM-DD
+    fecha_adquisicion: str = Field(..., pattern = r"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$") # formato: YYYY-MM-DD
     url_foto: str
     nombre: str
     tipo: str
@@ -130,7 +130,6 @@ categorias_metadata = {
         "keys": set(
             LibroCreate.schema()['properties'].keys()),
         "no_modificables": ["_id", "isbn"],
-        "validador_existencia": "isbn",
         "clase_categoria": Libro
         },
     "videojuegos": {

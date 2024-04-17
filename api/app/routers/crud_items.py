@@ -193,10 +193,8 @@ async def insertar_item(item: dict, usuario_conectado: dependencia_autenticacion
 
     Este endpoint es capaz de entender a qué categoria pertenece el item y actualizarlo en la base de datos gracias al analisis de metadatos del item que se desea actualizar.
 
-    Este endpoint no insertará items duplicados en la base de datos, se considera un item duplicado si el atributo (primary key) validador de la existencia del item ya existe en la colección del usuario.
-
     Parámetros:
-    - item (json): El objeto item se debe enviar en formato JSON en el cuerpo de la solicitud POST. Que debe incluir todos los atributos espeficos del modelo de datos de la categoria del item a insertar. El item debe incluir si o si el atributo que valida la existencia del item en la base de datos (por ejemplo el "_id" o el "isbn"). No se insertaran items duplicados en la base de datos.
+    - item (json): El objeto item se debe enviar en formato JSON en el cuerpo de la solicitud POST. Que debe incluir todos los atributos espeficos del modelo de datos de la categoria del item a insertar.
 
     Encabezados requeridos:
     - Authorization (str): Token de acceso del tipo "Bearer" requerido para autenticar la solicitud. Debe ser incluido en el encabezado de la solicitud como "Authorization: Bearer \<token\>".
@@ -205,17 +203,13 @@ async def insertar_item(item: dict, usuario_conectado: dependencia_autenticacion
     - 200: Retorna un objeto JSON con el mensaje de éxito, indicando que el item ha sido insertado correctamente.
     - 400: Retorna un objeto JSON con el mensaje de que no se pudo insertar el item (poco común, motivos desconocidos).
     - 401: No autorizado - Autenticación fallida o no proporcionada. Se devuelve cuando el usuario no está autenticado o si el token de autenticación es inválido.
-    - 409: Conflicto - Se devuelve cuando el item con el atributo validador (por ejemplo el _id o el isbn) ya existe en la colección del usuario, por lo que el item no se insertará.
-    - 422: Entidad no procesable - Se devuelve cuando los atributos del item no cumplen con el modelo de datos de la API o el atributo validador de la existencia del item en la base de datos no fué enviado por parte del cliente (por ejemplo, no se envió el _id).
+    - 422: Entidad no procesable - Se devuelve cuando los atributos del item no cumplen con el modelo de datos de la API o porque los datos enviados no cumplen con el formato de datos correcto (formato de fecha, tipo de dato, etc).
     """
     # obtener los metadatos del item
-    objeto_valido, nombre_categoria, atributo_validador_existencia, contiene_id, atributos_no_modificables, clase_categoria = obtener_metadatos_item(item)
+    objeto_valido, nombre_categoria, contiene_id, atributos_no_modificables, clase_categoria = obtener_metadatos_item(item)
 
     if not objeto_valido:
-        raise HTTPException(status_code=422, detail=f"El item no cumple con los atributos de ningun modelo de datos de las categorias, asegurese de que el item tenga los atributos correctos para la categoria a la que pertece")
-    # para poder insertar el item, se debe enviar el _id o el atributo que valida la existencia
-    if atributo_validador_existencia not in item.keys(): # se puede dar cuando el atributo validador es el _id y no se envia el _id
-        raise HTTPException(status_code=422, detail=f"El item enviado no contiene el atributo '{atributo_validador_existencia}' que valida la existencia del item que se desea insertar para la categoria '{nombre_categoria}'")
+        raise HTTPException(status_code=422, detail=f"El item no cumple con los atributos de ningun modelo de datos de las categorias, asegurese de que el item tenga los atributos correctos para la categoria a la que pertenece")
 
     coleccion_usuarios = bdd["usuarios"]
     coleccion_colecciones = bdd["colecciones"]
@@ -224,29 +218,13 @@ async def insertar_item(item: dict, usuario_conectado: dependencia_autenticacion
     respuesta = coleccion_usuarios.find_one({"username": usuario_conectado.username}, {"coleccion": 1})
     id_colecciones = respuesta['coleccion'].id
 
-    atributo_validador = None
-    if atributo_validador_existencia == "_id":
-        atributo_validador = ObjectId(item["_id"])
-    else:
-        atributo_validador = item[atributo_validador_existencia]
-
-    # Buscar item con el id proporcionado
-    item_buscado = coleccion_colecciones.find_one(
-        {
-            "_id": ObjectId(id_colecciones),
-            f"{nombre_categoria}.{atributo_validador_existencia}": atributo_validador
-        },
-        {f"{nombre_categoria}.$": 1}
-    )
-
-    # Si el item existe, no insertarlo
-    if item_buscado:
-        raise HTTPException(status_code=409, detail=f"El item con {atributo_validador_existencia} '{atributo_validador}' de la categoria '{nombre_categoria}' ya existe en la colección")
-    else:
+    try:
         item = clase_categoria(**item) # convertir el diccionario a un objeto de la clase correspondiente y que se genere un _id
-        resultado = coleccion_colecciones.update_one({ "_id": ObjectId(id_colecciones) }, { "$push": { f"{nombre_categoria}": item.model_dump(by_alias=True) } })
+    except:
+        raise HTTPException(status_code=422, detail=f"Los datos enviados no cumplen con el formato de datos correcto (formato de fecha, tipo de dato, etc)")
+    resultado = coleccion_colecciones.update_one({ "_id": ObjectId(id_colecciones) }, { "$push": { f"{nombre_categoria}": item.model_dump(by_alias=True) } })
 
-        if resultado.modified_count:
-            return {"mensaje": f"El item con {atributo_validador_existencia} '{atributo_validador}' de la categoria '{nombre_categoria}' ha sido agregado exitosamente"}
-        else:
-            raise HTTPException(status_code=400, detail=f"El item con {atributo_validador_existencia} '{atributo_validador}' de la categoria '{nombre_categoria}' no pudo ser agregado")
+    if resultado.modified_count:
+        return {"mensaje": f"El item con _id '{item.id}' de la categoria '{nombre_categoria}' ha sido agregado exitosamente"}
+    else:
+        raise HTTPException(status_code=400, detail=f"El item con _id '{item.id}' de la categoria '{nombre_categoria}' no pudo ser agregado")

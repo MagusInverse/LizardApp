@@ -24,7 +24,7 @@ def obtener_metadatos_item(item: dict):
     Función para reconocer propiedades de los objetos enviados en las peticiones
 
     Valida si el objeto enviado en la petición cumple con el modelo de datos (si es un objeto válido)
-    Obtiene y retorna información sobre el objeto enviado en la petición (categoria, atributo validador de existencia, etc.)
+    Obtiene y retorna información sobre el objeto enviado en la petición
     """
     # atributos del modelo enviado por el cliente
     item_keys = set(item.keys())
@@ -32,7 +32,6 @@ def obtener_metadatos_item(item: dict):
     contiene_id = False
     objeto_valido = False
     nombre_categoria = None
-    atributo_validador_existencia = "_id" # por defecto, el atributo que valida la existencia es el id
     atributos_no_modificables = []
     clase_categoria = None # se usara para despues poder convertir el diccionario a un objeto de la clase correspondiente
 
@@ -47,10 +46,6 @@ def obtener_metadatos_item(item: dict):
         if item_keys == categorias_metadata[categoria]["keys"]:
             objeto_valido = True
 
-            # obtener el atributo que valida la existencia
-            if "validador_existencia" in categorias_metadata[categoria].keys():
-                atributo_validador_existencia = categorias_metadata[categoria]["validador_existencia"]
-
             # obtener los atributos no modificables
             atributos_no_modificables = categorias_metadata[categoria]["no_modificables"]
 
@@ -60,4 +55,4 @@ def obtener_metadatos_item(item: dict):
             # obtener la clase de pydantic que representa la categoria
             clase_categoria = categorias_metadata[categoria]["clase_categoria"]
             break
-    return objeto_valido, nombre_categoria, atributo_validador_existencia, contiene_id, atributos_no_modificables, clase_categoria
+    return objeto_valido, nombre_categoria, contiene_id, atributos_no_modificables, clase_categoria
