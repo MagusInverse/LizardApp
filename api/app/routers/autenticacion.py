@@ -121,6 +121,7 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
             {"username": user.username,
              "hashed_password": hashed_password.decode('utf-8'),
              "email": user.email,
+            "url_foto": user.url_foto,
              "coleccion": {
                 "$ref": "colecciones",
                 "$id": id_coleccion,

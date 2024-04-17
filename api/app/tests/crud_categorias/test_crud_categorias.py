@@ -13,7 +13,7 @@ def ejecutar_antes_y_despues_de_todos_los_tests():
     #registrar usuario de prueba
     client = TestClient(app)
 
-    response = client.post("api/autenticacion/registro", json={"username": "usuario_prueba", "password": "duoc123456", "email": "example@example.cl"})
+    response = client.post("api/autenticacion/registro", json={"username": "usuario_prueba", "password": "duoc123456", "email": "example@example.cl", "url_foto": "www.example.com"})
 
     yield
     #eliminar usuario de prueba

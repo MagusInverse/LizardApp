@@ -22,5 +22,6 @@ class UsuarioRegistro(BaseModel):
                           max_length=ConfiguracionModeloConstraints.largo_maximo_password.value,
                           pattern=ConfiguracionModeloConstraints.password_regex.value)
     email: EmailStr
+    url_foto: str
     fecha_registro: datetime = Field(default_factory=lambda: datetime.now(tz=timezone.utc))
 

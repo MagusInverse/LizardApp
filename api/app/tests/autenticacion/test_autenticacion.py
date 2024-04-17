@@ -17,13 +17,14 @@ class User(BaseModel):
     username: str
     password: str
     email: str
+    url_foto: str
 
 
 @pytest.mark.parametrize("username, password, email", datos_prueba_test_registrar_usuario_valido)
 def test_registrar_usuario_valido(username, password, email):
     client = TestClient(app)
     body = User(username=username, password=password,
-                email=email).model_dump()
+                email=email, url_foto="www.example.com").model_dump()
 
     response = client.post("api/autenticacion/registro", json=body)
     print(response.text)  # debug
