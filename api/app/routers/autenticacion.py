@@ -8,7 +8,7 @@ from jose import JWTError, jwt
 import bcrypt
 
 #importar modelos
-from app.modelos.modelo_usuarios import UsuarioRegistro
+from app.modelos.modelo_usuarios import UsuarioRegistro, UsuarioRecuperarContrasena
 from app.modelos.modelo_autenticacion import Token, TokenData, User
 
 #Constantes para JWT
@@ -131,3 +131,41 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
         return {"mensaje": "Usuario registrado exitosamente"}
     else:
         raise HTTPException(status_code=500, detail="Error al registrar usuario")
+
+
+# endpoint para recuperar contraseña
+@router.post("/actualizar/contrasena")
+async def actualizar_contrasena_por_username_email(user_recuperar_pass: UsuarioRecuperarContrasena, bdd: dependencia_bdd):
+    """
+    Actualiza la contraseña de un usuario en la base de datos. Se encarga de verificar que el nombre de usuario
+    coincida con el email para validar la identidad, cifra la contraseña y actualiza la nueva contraseña del usuario en la base de datos.
+
+    Parámetros:
+    - username (str, body): Nombre del usuario.
+    - email (str, body): Correo electrónico del usuario.
+    - nueva_password (str, body): La nueva contraseña del usuario.
+
+    Respuestas:
+    - 200: Contraseña actualizada correctamente.
+    - 404: Usuario no encontrado o email incorrecto.
+    - 500: Error interno del servidor, fallo al actualizar la contraseña.
+    """
+    coleccion_usuarios = bdd["usuarios"]
+    coleccion_colecciones = bdd["colecciones"]
+
+    # validar que el usuario sea quien dice ser
+    usuario_encontrado = coleccion_usuarios.find_one({ "username": user_recuperar_pass.username, "email": user_recuperar_pass.email })
+    # si el usuario existe, actualizar contraseña
+    if usuario_encontrado:
+        #actualizar contraseña
+        hashed_password = bcrypt.hashpw(user_recuperar_pass.nueva_password.encode('utf-8'), bcrypt.gensalt())
+        respuesta = coleccion_usuarios.update_one(
+            {"username": user_recuperar_pass.username},
+            {"$set": {"hashed_password": hashed_password.decode('utf-8')}}
+            )
+        if  respuesta.modified_count == 1:
+            return {"mensaje": "Contraseña actualizada correctamente"}
+        else :
+            raise HTTPException(status_code=500)
+
+    raise HTTPException(status_code=404, detail="Usuario no existe o email incorrecto")
