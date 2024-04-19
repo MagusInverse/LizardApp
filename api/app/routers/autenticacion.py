@@ -113,14 +113,14 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
 
     # validate user if exists
     usuario_encontrado = coleccion_usuarios.find_one({ "username": user.username })
-    if usuario_encontrado:
+    if usuario_encontrado: 
         raise HTTPException(status_code=409, detail="El usuario ya existe en la base de datos")
 
     coleccion_usuarios.insert_one(
             {"username": user.username,
              "hashed_password": hashed_password.decode('utf-8'),
              "email": user.email,
-            "url_foto": user.url_foto,
+             "url_foto": user.url_foto,
              "fecha_registro": user.fecha_registro
              })
 
