@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+import pytz
 from typing import Annotated
 
 from fastapi import HTTPException, APIRouter, Request, Depends
@@ -7,7 +8,7 @@ from jose import JWTError, jwt
 import bcrypt
 
 #importar modelos
-from app.modelos.modelo_usuarios import UsuarioRegistro, ColeccionUsuario
+from app.modelos.modelo_usuarios import UsuarioRegistro
 from app.modelos.modelo_autenticacion import Token, TokenData, User
 
 #Constantes para JWT
@@ -120,8 +121,9 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
             {"username": user.username,
              "hashed_password": hashed_password.decode('utf-8'),
              "email": user.email,
-            "url_foto": user.url_foto,
-             "fecha_registro": user.fecha_registro
+             "url_foto": user.url_foto,
+             "fecha_registro": datetime.now(pytz.timezone('Chile/Continental')).strftime('%Y-%m-%d'),
+             "hora_registro": datetime.now(pytz.timezone('Chile/Continental')).strftime('%H:%M')
              })
 
     usuario_check = coleccion_usuarios.find_one({"username": user.username})
