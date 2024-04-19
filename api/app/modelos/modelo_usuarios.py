@@ -1,16 +1,7 @@
 from pydantic import BaseModel, Field, EmailStr
-from datetime import datetime, timezone
 from .modelo_colecciones import Libro, Figura, Arma, Carta, Videojuego
 from typing import List
 from app.configuracion import ConfiguracionModeloConstraints
-
-
-class ColeccionUsuario(BaseModel):
-    videojuegos: List[Videojuego]
-    cartas: List[Carta]
-    armas: List[Arma]
-    figuras: List[Figura]
-    libros: List[Libro]
 
 
 class UsuarioRegistro(BaseModel):
@@ -23,5 +14,4 @@ class UsuarioRegistro(BaseModel):
                           pattern=ConfiguracionModeloConstraints.password_regex.value)
     email: EmailStr
     url_foto: str
-    fecha_registro: datetime = Field(default_factory=lambda: datetime.now(tz=timezone.utc))
 
