@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  usuario: string = "";
+  clave: string = "";
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  logeado(){
+    
+  }
 }
