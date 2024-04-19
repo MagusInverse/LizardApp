@@ -7,7 +7,7 @@ from jose import JWTError, jwt
 import bcrypt
 
 #importar modelos
-from app.modelos.modelo_usuarios import UsuarioRegistro
+from app.modelos.modelo_usuarios import UsuarioRegistro, ColeccionUsuario
 from app.modelos.modelo_autenticacion import Token, TokenData, User
 
 #Constantes para JWT
@@ -56,47 +56,76 @@ def crear_jwt(data: dict, expires_delta: timedelta = None):
 # Ruta para obtener un token de autenticación (login)
 @router.post("/token")
 async def login(bdd: dependencia_bdd, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
-	"""
-    Este endpoint se utiliza para que el usuario pueda obtener un token de autenticación y acceder a los endpoints protegidos
-	"""
+    """
+    Autentica a un usuario y genera un token de acceso tipo JWT.
 
-	usuario = validar_usuario(form_data.username, form_data.password, bdd)
-	if not usuario:
-		raise HTTPException(
-            status_code=401,
-            detail="nombre de usuario o contraseña incorrectos",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-	token_expiracion = timedelta(minutes=TOKEN_EXPIRACION_MINUTOS)
-	token = crear_jwt(
-        data={"sub": usuario}, expires_delta=token_expiracion
-    )
-	return Token(access_token=token, token_type="bearer")
+    Este endpoint recibe las credenciales del usuario (username y password),
+    verifica estas credenciales contra una base de datos (bdd) y, si son correctas,
+    retorna un token JWT ( desde el front deben guardar este token para hacer solicitudes como usuario autenticado) que el usuario puede utilizar para autenticarse en futuras solicitudes a endpoints protegidos.
+
+    Parámetros:
+    - username (str, multipart/form-data): Dato del formulario que contiene el nombre de usuario.
+    - password (str, multipart/form-data):  Dato del formulario que contiene la contraseña del usuario.
+
+    Respuestas:
+    - 200: Retorna un objeto Token que contiene el token de acceso JWT y el tipo de token
+    - 401: Error que se lanza si el nombre de usuario o la contraseña son incorrectos.
+      Esta excepción incluye un encabezado 'WWW-Authenticate' con el valor 'Bearer' para indicar
+      el esquema de autenticación.
+    """
+
+    usuario = validar_usuario(form_data.username, form_data.password, bdd)
+    if not usuario:
+        raise HTTPException(
+                status_code=401,
+                detail="nombre de usuario o contraseña incorrectos",
+                headers={"WWW-Authenticate": "Bearer"},
+                )
+    token_expiracion = timedelta(minutes=TOKEN_EXPIRACION_MINUTOS)
+    token = crear_jwt(
+            data={"sub": usuario}, expires_delta=token_expiracion
+            )
+    return Token(access_token=token, token_type="bearer")
 
 # endpoint para registrar un usuario
 @router.post("/registro")
 async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
     """
-    Este endpoint se utiliza para registrar un usuario en la base de datos
+    Registra un nuevo usuario en la base de datos. Se encarga de verificar que el nombre de usuario
+    no esté previamente registrado, cifra la contraseña y almacena los datos del usuario en la base de datos.
+
+    Parámetros:
+    - username (str, body): Nombre de usuario del nuevo usuario.
+    - password (str, body): Contraseña del nuevo usuario.
+    - email (str, body): Correo electrónico del nuevo usuario.
+    - url_foto (str, body): URL de la foto de perfil del nuevo usuario.
+
+    Respuestas:
+    - 200: Usuario registrado correctamente.
+    - 409: Conflicto, el nombre de usuario ya existe en la base de datos.
+    - 422: Error en la validación de los datos del usuario, no cumple con las restricciones de longitud o formato.
+    - 500: Error interno del servidor, fallo al registrar el usuario.
     """
 
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
     coleccion_usuarios = bdd["usuarios"]
+    coleccion_colecciones = bdd["colecciones"]
 
     # validate user if exists
     usuario_encontrado = coleccion_usuarios.find_one({ "username": user.username })
-    if usuario_encontrado:
+    if usuario_encontrado: 
         raise HTTPException(status_code=409, detail="El usuario ya existe en la base de datos")
+
     coleccion_usuarios.insert_one(
             {"username": user.username,
              "hashed_password": hashed_password.decode('utf-8'),
              "email": user.email,
-             "coleccion": user.coleccion.model_dump(),
+             "url_foto": user.url_foto,
              "fecha_registro": user.fecha_registro
              })
 
     usuario_check = coleccion_usuarios.find_one({"username": user.username})
     if usuario_check:
-        return str(usuario_check["_id"])
+        return {"mensaje": "Usuario registrado exitosamente"}
     else:
         raise HTTPException(status_code=500, detail="Error al registrar usuario")
