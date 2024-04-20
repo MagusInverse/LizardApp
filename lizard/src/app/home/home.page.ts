@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  accessToken='';
 
-  constructor() { }
+  constructor(private activedRouter: ActivatedRoute, private router: Router) {
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
+      }
+    })
+   }
 
   ngOnInit() {
+  }
+
+  perfil(){
+    
   }
 
 }
