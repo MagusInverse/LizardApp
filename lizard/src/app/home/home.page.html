@@ -1,13 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label>
+      <h1>Bienvenido</h1>
+    </ion-label>
+  </ion-item>
+
+  <ion-card>
+  <ion-card-header>
+    <!-- Título del card -->
+    <ion-card-title>Detalles del Usuario</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <!-- Imagen del usuario -->
+        <ion-col size="6">
+          <img src="ruta_a_tu_imagen.jpg" alt="Imagen de perfil" style="width: 100%;">
+        </ion-col>
+
+        <ion-col size="6">
+          <!-- Nombre del usuario -->
+          <ion-label>Nombre: Juan Pérez</ion-label>
+
+          <!-- Título -->
+          <ion-label>Título: Desarrollador Web</ion-label>
+
+          <!-- Email -->
+          <ion-label>Email: 'juanexample.com'</ion-label>
+
+          <!-- Iconos -->
+          <ion-row>
+            <ion-col size="2">
+              <img src="icono1.png" alt="Icono 1" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="icono2.png" alt="Icono 2" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="icono3.png" alt="Icono 3" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="icono4.png" alt="Icono 4" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="icono5.png" alt="Icono 5" style="width: 100%;">
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+  </ion-card>
+  <br>
+  <br>
+  <ion-button expand="full">Full</ion-button>
+  <br>
+  <ion-button expand="full">Full</ion-button>
+  <br>
+  <ion-button expand="full">Full</ion-button>
+  <br>
+  <ion-button expand="full">Full</ion-button>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button>A</ion-button>
+    <ion-button>B</ion-button>
+    <ion-button>C</ion-button>
+  </ion-toolbar>
+</ion-footer>
