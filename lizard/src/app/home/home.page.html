@@ -6,48 +6,35 @@
   </ion-item>
 
   <ion-card>
-  <ion-card-header>
-    <!-- Título del card -->
-    <ion-card-title>Usuario</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-    <ion-grid>
-      <ion-row>
-        <!-- Imagen del usuario -->
-        <ion-col size="6">
-          <img src="/lizard/src/assets/img/logo01.png" alt="Imagen de perfil" style="width: 90%;">
-        </ion-col>
-
-        <ion-col size="6">
-          <!-- Título -->
-          <ion-label>Desarrollador</ion-label>
-          <br>
-          <!-- Email -->
-          <ion-label>juanexample.com</ion-label>
-
-          <!-- Iconos -->
-          <ion-row>
-            <ion-col size="2">
-              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
-            </ion-col>
-            <ion-col size="2">
-              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
-            </ion-col>
-            <ion-col size="2">
-              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
-            </ion-col>
-            <ion-col size="2">
-              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
-            </ion-col>
-            <ion-col size="2">
-              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
-            </ion-col>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-    </ion-grid> 
-  </ion-card-content>
+    <ion-card-header>
+      <ion-card-title>Usuario</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <!-- Imagen del usuario -->
+            <img [src]="urlFoto" alt="Imagen de perfil" style="width: 90%;">
+          </ion-col>
+  
+          <ion-col size="6">
+            <!-- Título -->
+            <ion-label>{{ username }}</ion-label>
+            <br>
+            <!-- Email -->
+            <ion-label>{{ email }}</ion-label>
+  
+            <!-- Iconos -->
+            <ion-row>
+              <ion-col size="2" *ngFor="let titulo of titulos">
+                {{ titulo }}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid> 
+    </ion-card-content>
   </ion-card>
   <br>
   <br>
