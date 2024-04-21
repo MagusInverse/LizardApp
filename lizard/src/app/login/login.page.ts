@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
-
+import { AlertController } from '@ionic/angular';
+import { MainServiceService } from '../services/main-service.service';
 
 @Component({
   selector: 'app-login',
@@ -10,21 +9,10 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  //Variables desde la vista
-  usuario: string = "";
-  clave: string = "";
+  usuario: string = '';
+  clave: string = '';
 
-  //Usuario
-  usuarioArr: any = [
-    {
-      email:'',
-      fecha_registro: '',
-      url_foto: '',
-      username:''
-    }
-  ]
-
-  constructor(private router: Router, private alertController: AlertController, public  httpClient : HttpClient) { }
+  constructor(private router: Router, private alertController: AlertController, private servicio: MainServiceService) { }
 
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
@@ -39,13 +27,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  logeado(){
-    const url = 'http://localhost:8000/api/autenticacion/token';
-    const body = new FormData();
-    body.append('username', this.usuario);
-    body.append('password', this.clave);
-
-    this.httpClient.post(url, body).subscribe(
+  logeado() {
+    this.servicio.inicioSesion(this.usuario, this.clave).subscribe(
       (response: any) => {
         const accessToken = response.access_token;
         let navigationExtras: NavigationExtras = {
@@ -55,7 +38,6 @@ export class LoginPage implements OnInit {
         }
 
         if (accessToken !== '' ){
-          this.presentAlert('Bienvenid@');
           this.router.navigate(['./home'], navigationExtras);
         }
         else{
@@ -65,6 +47,6 @@ export class LoginPage implements OnInit {
       (error) => {
         this.presentAlert('Usuario/Password Incorrecta');
       }
-    )
+    );
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MainServiceService } from '../services/main-service.service';
+
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomePage implements OnInit {
   logros: string[] = [];
   coleccion: string[] = [];
 
-  constructor(private activedRouter: ActivatedRoute, private alertController: AlertController, private router: Router, public  httpClient : HttpClient) {
+  constructor(private activedRouter: ActivatedRoute, private alertController: AlertController, private router: Router, private servicio: MainServiceService) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -37,32 +38,19 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    const url = 'http://localhost:8000/api/obtener/info/usuario';
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.accessToken}`
-    });
-
-    const header = new FormData();
-    header.append('username', this.accessToken);
-
-    this.httpClient.get(url, { headers }).subscribe(
+    this.presentAlert('Bienvenid@');
+    this.servicio.informacionUsuario(this.accessToken).subscribe(
       (data: any) => {
-        this.usuarioInfo = data;
-        this.username = this.usuarioInfo.username;
-        this.urlFoto = this.usuarioInfo.url_foto;
-        this.email = this.usuarioInfo.email;
-        this.titulos = this.usuarioInfo.titulos;
-        this.logros = this.usuarioInfo.logros;
-        this.coleccion = Object.keys(this.usuarioInfo.coleccion);
-        this.presentAlert(JSON.stringify(this.usuarioInfo));
+        this.username = data.username;
+        this.urlFoto = data.url_foto;
+        this.email = data.email;
+        this.titulos = data.titulos;
+        this.logros = data.logros;
+        this.coleccion = Object.keys(data.coleccion);
       },
       (error) => {
         this.presentAlert(error);
       }
-    )
-    this.presentAlert(this.accessToken);
+    );
   }
-
-  //falta implementar que cargue con titulos y logros
-  
 }
