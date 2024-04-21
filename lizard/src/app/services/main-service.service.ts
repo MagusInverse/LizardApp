@@ -38,8 +38,7 @@ export class MainServiceService {
   //Calcular sistema de titulos
 
   //calcular sistema de logros
-  
-  //pasar funciones de los ts aca
+
   //Alertas
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
@@ -76,6 +75,28 @@ export class MainServiceService {
   }
 
   obtenerTierUser(){
-    
+
+  }
+
+  // Colecciones
+
+  obtenerItemsColeccion(){
+
+  }
+
+  obtenerItemCatId(){
+
+  }
+
+  actualizarItem(){
+
+  }
+
+  insertarItem(){
+
+  }
+
+  agregarCategoriaUsuario(){
+
   }
 }
