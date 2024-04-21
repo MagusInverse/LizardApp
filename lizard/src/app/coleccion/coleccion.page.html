@@ -1,13 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>coleccion</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">coleccion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label>
+      <h1>Colecciones</h1>
+    </ion-label>
+  </ion-item>
+
+  <ion-card>
+  <ion-card-header>
+    <!-- Título del card -->
+    <ion-card-title>Usuario</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <!-- Imagen del usuario -->
+        <ion-col size="6">
+          <img src="/lizard/src/assets/img/logo01.png" alt="Imagen de perfil" style="width: 90%;">
+        </ion-col>
+
+        <ion-col size="6">
+          <!-- Título -->
+          <ion-label>Desarrollador</ion-label>
+          <br>
+          <!-- Email -->
+          <ion-label>juanexample.com</ion-label>
+
+          <!-- Iconos -->
+          <ion-row>
+            <ion-col size="2">
+              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
+            </ion-col>
+            <ion-col size="2">
+              <img src="/lizard/src/assets/img/estrella.png" style="width: 100%;">
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+  </ion-card>
+  <br>
+  <br>
+  <ion-button expand="full">Categoria</ion-button>
+  <br>
+  <ion-button expand="full">Top 10</ion-button>
+  <br>
+  <ion-button expand="full">Logros y titulos</ion-button>
+  <br>
+  <ion-button expand="full">Generar Tarjeta</ion-button>
+  <br>
+  <ion-button expand="full">Acerca de ...</ion-button>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button>A</ion-button>
+    <ion-button>B</ion-button>
+    <ion-button>C</ion-button>
+  </ion-toolbar>
+</ion-footer>
