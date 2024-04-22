@@ -169,3 +169,30 @@ async def actualizar_contrasena_por_username_email(user_recuperar_pass: UsuarioR
             raise HTTPException(status_code=500)
 
     raise HTTPException(status_code=404, detail="Usuario no existe o email incorrecto")
+
+
+# endpoint para validar usuario antes de recuperar contraseña
+@router.get("/validar/usuario/{username}/{email}")
+async def validar_usuario_por_username_email(username: str, email: str, bdd: dependencia_bdd):
+    """
+    Valida la identidad del usuario con su username y email. Se encarga de verificar que el nombre de usuario
+    coincida con el email para validar la identidad antes de actualizar la contraseña.
+
+    Parámetros:
+    - username (str, body): Nombre del usuario.
+    - email (str, body): Correo electrónico del usuario.
+
+    Respuestas:
+    - 200: Mensaje de validación exitosa, el usuario es quien dice ser.
+    - 404: Usuario no encontrado o email incorrecto, no se puede validar la identidad.
+    """
+    coleccion_usuarios = bdd["usuarios"]
+    coleccion_colecciones = bdd["colecciones"]
+
+    # validar que el usuario sea quien dice ser
+    usuario_encontrado = coleccion_usuarios.find_one({ "username": username, "email": email })
+    # si el usuario existe, retornar mensaje de validación exitosa
+    if usuario_encontrado:
+        return {"mensaje": "Usuario valido para recuperar contraseña"}
+
+    raise HTTPException(status_code=404, detail="Usuario no existe o email incorrecto, no es valido para recuperar contraseña")
