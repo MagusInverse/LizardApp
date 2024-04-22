@@ -48,8 +48,6 @@ export class RegistroPage implements OnInit {
     }
     else{
       this.presentAlert('El largo de la clave debe ser igual o superior a 8 caracteres');
-    }
-    
+    }    
   }
-
 }
