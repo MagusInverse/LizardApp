@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalpassPage } from '../modalpass/modalpass.page';
 
 @Component({
   selector: 'app-resetpass',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resetpass.page.scss'],
 })
 export class ResetpassPage implements OnInit {
+  
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
+  async abrirModal() {
+    const modal = await this.modalController.create({
+      component: ModalpassPage
+    });
+  
+  return await modal.present();
+
+  }
   ngOnInit() {
   }
-
 }

@@ -45,7 +45,12 @@ const routes: Routes = [
   {
     path: 'top10',
     loadChildren: () => import('./top10/top10.module').then( m => m.Top10PageModule)
-  }
+  },  {
+    path: 'modalpass',
+    loadChildren: () => import('./modalpass/modalpass.module').then( m => m.ModalpassPageModule)
+  },
+
+
 
 ];
 @NgModule({

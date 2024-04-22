@@ -137,7 +137,11 @@
     "schematicCollections": [
       "@ionic/angular-toolkit"
     ],
+<<<<<<< Updated upstream
     "analytics": "38585cc3-8eff-4c2e-ad19-7c6275001ad7"
+=======
+    "analytics": false
+>>>>>>> Stashed changes
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
