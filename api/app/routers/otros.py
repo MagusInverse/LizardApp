@@ -120,7 +120,7 @@ async def obtener_top_10(bdd: dependencia_bdd):
                 usuario["cantidad_logros"] = len(usuario["logros"]) if "logros" in usuario else 0
 
                 # obtener ultimo titulo obtenido
-                usuario["ultimo_titulo"] = usuario["titulos"][-1].nombre if usuario["cantidad_titulos"] > 0 else "novato"
+                usuario["ultimo_titulo"] = usuario["titulos"][-1]["nombre"] if usuario["cantidad_titulos"] > 0 else "novato"
 
                 # obtener cantidad de items por categoria y total de items
                 cantidad_items_col = 0
