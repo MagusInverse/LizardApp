@@ -103,7 +103,7 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
 
     Respuestas:
     - 200: Usuario registrado correctamente.
-    - 409: Conflicto, el nombre de usuario ya existe en la base de datos.
+    - 409: Conflicto, el nombre de usuario o correo ya existe en la base de datos.
     - 422: Error en la validación de los datos del usuario, no cumple con las restricciones de longitud o formato.
     - 500: Error interno del servidor, fallo al registrar el usuario.
     """
@@ -112,10 +112,15 @@ async def registrar_usuario(bdd: dependencia_bdd, user: UsuarioRegistro):
     coleccion_usuarios = bdd["usuarios"]
     coleccion_colecciones = bdd["colecciones"]
 
-    # validate user if exists
+    # validar si existe el username
     usuario_encontrado = coleccion_usuarios.find_one({ "username": user.username })
     if usuario_encontrado:
-        raise HTTPException(status_code=409, detail="El usuario ya existe en la base de datos")
+        raise HTTPException(status_code=409, detail="El username ya existe en la base de datos")
+
+    # validar si existe el email
+    usuario_encontrado = coleccion_usuarios.find_one({ "email": user.email })
+    if usuario_encontrado:
+        raise HTTPException(status_code=409, detail="El correo ya existe en la base de datos")
 
     coleccion_usuarios.insert_one(
             {"username": user.username,
