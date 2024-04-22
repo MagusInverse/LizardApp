@@ -21,7 +21,6 @@ export class MainServiceService {
   URL_UPDATE_ITEM = 'http://localhost:8000/api/items/actualizar/item/';
   URL_DELETE_ITEM = 'http://localhost:8000/api/items/eliminar/item/{categoria}/{id_item}';
   URL_ADD_CAT = 'http://localhost:8000/api/categorias/agregar/categoria/{nombre_categoria}';
-  URL_LIST_CAT = 'http://localhost:8000';
   URL_TOP_10 = 'http://localhost:8000/api/obtener/top/10';
 
   // Variables Usar
@@ -66,8 +65,15 @@ export class MainServiceService {
     return this.httpClient.get(this.URL_INFO_USER, { headers });
   }
 
-  registrarUsuario(){
+  registrarUsuario(username: string, correo: string, clave: string, url: string): Observable<any> {
+    const userData = {
+      username: username,
+      email: correo,
+      password: clave,
+      url_foto: url
+    };
 
+    return this.httpClient.post(this.URL_REGISTRO, userData);
   }
 
   resetearClave(){
