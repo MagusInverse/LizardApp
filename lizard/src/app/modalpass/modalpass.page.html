@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Nuevo Password
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="key-outline"></ion-icon>  Password</ion-label>
+    <ion-input type="password" [(ngModel)]="clave1" placeholder="*********"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="key-outline"></ion-icon>  Repetir Password</ion-label>
+    <ion-input type="password" [(ngModel)]="clave1" placeholder="*********"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-button expand="full">Resetear</ion-button>
+
+</ion-content>
