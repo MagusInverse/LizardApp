@@ -10,4 +10,22 @@
       <ion-title size="large">tarjeta</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <br>
+  <!-- seleccionar el color -->
+  <ion-item>
+    <ion-label>Color principal</ion-label>
+    <input type="color" [(ngModel)]="colorTarjeta">
+  </ion-item>
+  <!-- seleccionar la fuente de letra -->
+  <ion-item>
+    <ion-select [(ngModel)]="fuenteTarjeta" label="Fuente de letra:" label-placement="floating">
+      <!-- poner aquí las opciones de fuentes -->
+      <ion-select-option value="Arial">Arial</ion-select-option>
+      <ion-select-option value="Courier New">Courier New</ion-select-option>
+      <ion-select-option value="Georgia">Georgia</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" (click)="generarTarjeta()">Generar tarjeta</ion-button>
 </ion-content>
