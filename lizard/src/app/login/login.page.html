@@ -1,17 +1,23 @@
-<ion-content [fullscreen]="true">
-  <ion-item>
-      <ion-label position="floating" class="labels"><ion-icon name="person-outline" ></ion-icon> Usuario</ion-label>
-      <ion-input [(ngModel)]="usuario" placeholder="example"></ion-input>
-  </ion-item>
+<ion-content class="background" [fullscreen]="true">
   <br>
-  <ion-item>
-      <ion-label position="floating" class="labels"><ion-icon name="key-outline"></ion-icon> Password</ion-label>
-      <ion-input type="password" [(ngModel)]="clave"></ion-input>
-  </ion-item>
+    <ion-img class="logo-container" src="assets/img/loginicon.png" alt="Logo de la aplicación"></ion-img>
+    <br>
+    <br>
+    <ion-card-content>  
+      <ion-item>
+      <ion-label position="floating" class="labels fuentes-cards"><ion-icon name="person-outline" ></ion-icon> Usuario</ion-label>
+      <ion-input [(ngModel)]="usuario" placeholder="Correo o nombre de usuario"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item>
+      <ion-label position="floating" class="labels fuentes-cards"><ion-icon name="key-outline"></ion-icon> Password</ion-label>
+      <ion-input type="password" [(ngModel)]="clave" placeholder="Contraseña"></ion-input>
+      </ion-item>
+    </ion-card-content>
   <br>
   <ion-button expand="block" (click)="logeado()" class="labels" color="dark">Ingresar</ion-button>
   <br>
-  <a href="#" [routerLink]="['/registro']" class="labels" >Crear tu cuenta gratis</a>
+  <a href="#" [routerLink]="['/registro']" style="margin: 0 auto; display:block; text-align: center; color: rgb(255, 255, 255); font-size: 20px;" class="labels fuentes-cards" >Crear tu cuenta gratis</a>
   <br>
-  <a href="#" [routerLink]="['/resetpass']" class="labels" >Recuperar contraseña</a>
+  <a href="#" [routerLink]="['/resetpass']" style="margin: 0 auto; display:block; text-align: center; color: rgb(255, 255, 255); font-size: 20px;" class="labels fuentes-cards" >Recuperar contraseña</a>
 </ion-content>
