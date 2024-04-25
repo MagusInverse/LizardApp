@@ -49,6 +49,26 @@ const routes: Routes = [
     path: 'modalpass',
     loadChildren: () => import('./modalpass/modalpass.module').then( m => m.ModalpassPageModule)
   },
+  {
+    path: 'modal-crear-libro',
+    loadChildren: () => import('./modal-crear-libro/modal-crear-libro.module').then( m => m.ModalCrearLibroPageModule)
+  },
+  {
+    path: 'modal-crear-figura',
+    loadChildren: () => import('./modal-crear-figura/modal-crear-figura.module').then( m => m.ModalCrearFiguraPageModule)
+  },
+  {
+    path: 'modal-crear-arma',
+    loadChildren: () => import('./modal-crear-arma/modal-crear-arma.module').then( m => m.ModalCrearArmaPageModule)
+  },
+  {
+    path: 'modal-crear-carta',
+    loadChildren: () => import('./modal-crear-carta/modal-crear-carta.module').then( m => m.ModalCrearCartaPageModule)
+  },
+  {
+    path: 'modal-crear-videojuego',
+    loadChildren: () => import('./modal-crear-videojuego/modal-crear-videojuego.module').then( m => m.ModalCrearVideojuegoPageModule)
+  },
 
 
 

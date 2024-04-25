@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Agregar nuevo libro a la colección
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre del libro</ion-label>
+    <ion-input [(ngModel)]="libro.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto del libro</ion-label>
+    <ion-input [(ngModel)]="libro.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de libro</ion-label>
+    <ion-input [(ngModel)]="libro.tipo" type="text" placeholder="ejemplo: "></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
+    <ion-input [(ngModel)]="libro.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="libro.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <!-- inputs de datos especificos para un libro -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Autor </ion-label>
+    <ion-input [(ngModel)]="libro.autor" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Editorial </ion-label>
+    <ion-input [(ngModel)]="libro.editorial" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Genero </ion-label>
+    <ion-input [(ngModel)]="libro.genero" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Edición </ion-label>
+    <ion-input [(ngModel)]="libro.edicion" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> ISBN </ion-label>
+    <ion-input [(ngModel)]="libro.isbn" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Paginas </ion-label>
+    <ion-input [(ngModel)]="libro.paginas" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Año de publicación </ion-label>
+    <ion-input [(ngModel)]="libro.anio_publicacion" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-button expand="full">Agregar libro</ion-button>
+
+</ion-content>

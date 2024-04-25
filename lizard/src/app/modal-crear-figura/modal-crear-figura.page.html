@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Agregar nueva figura a la colección
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre de la figura</ion-label>
+    <ion-input [(ngModel)]="figura.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto de la figura</ion-label>
+    <ion-input [(ngModel)]="figura.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de figura</ion-label>
+    <ion-input [(ngModel)]="figura.tipo" type="text" placeholder="ejemplo: "></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
+    <ion-input [(ngModel)]="figura.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="figura.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <!-- inputs de datos especificos para una figura -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Origen </ion-label>
+    <ion-input [(ngModel)]="figura.origen" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tamaño de la figura </ion-label>
+    <ion-input [(ngModel)]="figura.tamano" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Material </ion-label>
+    <ion-input [(ngModel)]="figura.material" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Empresa </ion-label>
+    <ion-input [(ngModel)]="figura.empresa" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-button expand="full">Agregar figura</ion-button>
+
+</ion-content>
