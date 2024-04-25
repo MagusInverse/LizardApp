@@ -23,11 +23,12 @@
 
   <ion-item>
     <ion-label position="floating" class="labels"><ion-icon name="key-outline"></ion-icon>  Repetir Password</ion-label>
-    <ion-input type="password" [(ngModel)]="clave1" placeholder="*********"></ion-input>
+    <ion-input type="password" [(ngModel)]="clave2" placeholder="*********"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-button expand="full">Resetear</ion-button>
+  <ion-button expand="full" (click)="resetearPass()">Resetear</ion-button>
+  <ion-button expand="full" [routerLink]="['/login']">Cancelar</ion-button>
 
 </ion-content>

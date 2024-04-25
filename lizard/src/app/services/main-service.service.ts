@@ -10,6 +10,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MainServiceService {
+  // Variables Usar
+  accessToken='';
+  usuarioInfo: any;
+  username: string = '';
+  urlFoto: string = '';
+  email: string = '';
+  titulos: string[] = [];
+  logros: string[] = [];
+  coleccion: string[] = [];
+
   // Endpoints API
   URL_AUTHENTICATE = 'http://localhost:8000/api/autenticacion/token';
   URL_REGISTRO = 'http://localhost:8000/api/autenticacion/registro';
@@ -22,16 +32,11 @@ export class MainServiceService {
   URL_DELETE_ITEM = 'http://localhost:8000/api/items/eliminar/item/{categoria}/{id_item}';
   URL_ADD_CAT = 'http://localhost:8000/api/categorias/agregar/categoria/{nombre_categoria}';
   URL_TOP_10 = 'http://localhost:8000/api/obtener/top/10';
+  URL_VALIDATE_USER = 'http://localhost:8000/api/autenticacion/validar/usuario/{usuario}/{email}';
+  URL_INSERT_TITLE = 'http://localhost:8000/api/gamificacion/insertar/{titulos}';
+  URL_INSERT_ACHIEVEMENT ='http://localhost:8000/api/gamificacion/insertar/{logros}';
 
-  // Variables Usar
-  accessToken='';
-  usuarioInfo: any;
-  username: string = '';
-  urlFoto: string = '';
-  email: string = '';
-  titulos: string[] = [];
-  logros: string[] = [];
-  coleccion: string[] = [];
+
 
   constructor(private alertController: AlertController, public  httpClient : HttpClient) { }
   //Calcular sistema de titulos
@@ -76,8 +81,20 @@ export class MainServiceService {
     return this.httpClient.post(this.URL_REGISTRO, userData);
   }
 
-  resetearClave(){
+  resetearClave(username: string, correo: string, clave: string) {
+    const userData = {
+      username: username,
+      email: correo,
+      nueva_password: clave
+    };
 
+    return this.httpClient.post(this.URL_RESET_PASS, userData);
+  }
+
+  validateUser(username: string, correo: string): Observable<any> {
+    const url = this.URL_VALIDATE_USER.replace('{usuario}', username).replace('{email}', correo);
+    
+    return this.httpClient.get(url);
   }
 
   obtenerTierUser(){
