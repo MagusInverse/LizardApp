@@ -1,13 +1,88 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>modalCrearVideojuego</ion-title>
+    <ion-title>
+      Agregar nuevo videojuego a la colección
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">modalCrearVideojuego</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<br>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre del videojuego</ion-label>
+    <ion-input [(ngModel)]="videojuego.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto del videojuego</ion-label>
+    <ion-input [(ngModel)]="videojuego.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de videojuego</ion-label>
+    <ion-input [(ngModel)]="videojuego.tipo" type="text" placeholder="ejemplo: "></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
+    <ion-input [(ngModel)]="videojuego.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="videojuego.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <!-- inputs de datos especificos para un videojuego -->
+
+  <!-- plataforma: string; -->
+  <!-- genero: string; -->
+  <!-- creador: string; -->
+  <!-- caracteristicas: string; -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Plataforma </ion-label>
+    <ion-input [(ngModel)]="videojuego.plataforma" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Genero </ion-label>
+    <ion-input [(ngModel)]="videojuego.genero" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Creador </ion-label>
+    <ion-input [(ngModel)]="videojuego.creador" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Caracteristicas </ion-label>
+    <ion-input [(ngModel)]="videojuego.caracteristicas" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-button expand="full">Agregar videojuego</ion-button>
+
 </ion-content>
