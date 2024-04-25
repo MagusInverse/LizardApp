@@ -31,14 +31,14 @@ class LibroCreate(ItemCreate):
 
 class FiguraCreate(ItemCreate):
     origen: str
-    tamano: str
+    tamano: int
     material: str
     empresa: str
 
 
 class ArmaCreate(ItemCreate):
     material: str
-    tamano: str
+    tamano: int
     peso: float
     fabricante: str
 
