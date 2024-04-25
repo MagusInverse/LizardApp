@@ -6,7 +6,7 @@ interface UsuarioTop10 {
   ultimo_titulo: string;
   cantidad_logros: number;
   cantidad_titulos: number;
-  cantidad_items_totales: number;
+  cantidad_items: number;
 }
 
 @Component({
