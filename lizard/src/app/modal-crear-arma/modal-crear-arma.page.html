@@ -1,13 +1,88 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>modalCrearArma</ion-title>
+    <ion-title>
+      Agregar nueva arma a la colección
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">modalCrearArma</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<br>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre de la arma</ion-label>
+    <ion-input [(ngModel)]="arma.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto de la arma</ion-label>
+    <ion-input [(ngModel)]="arma.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de arma</ion-label>
+    <ion-input [(ngModel)]="arma.tipo" type="text" placeholder="ejemplo: "></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
+    <ion-input [(ngModel)]="arma.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="arma.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <!-- inputs de datos especificos para un arma -->
+
+  <!-- material: string; -->
+  <!-- tamano: number; -->
+  <!-- peso: number; -->
+  <!-- fabricante: string; -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Material </ion-label>
+    <ion-input [(ngModel)]="arma.material" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tamaño </ion-label>
+    <ion-input [(ngModel)]="arma.tamano" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Peso </ion-label>
+    <ion-input [(ngModel)]="arma.peso" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Fabricante </ion-label>
+    <ion-input [(ngModel)]="arma.fabricante" type="text" placeholder="Descripción del libro"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-button expand="full">Agregar arma</ion-button>
+
 </ion-content>
