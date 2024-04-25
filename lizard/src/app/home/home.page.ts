@@ -53,4 +53,44 @@ export class HomePage implements OnInit {
       }
     );
   }
+
+  categoria(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['./categorias'], navigationExtras);
+  }
+
+  top10(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+
+    this.router.navigate(['./top10'], navigationExtras);
+  }
+
+  logrosytitulos(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+
+    this.router.navigate(['./titulosylogros'], navigationExtras);
+  }
+
+  generartarjeta(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+
+    this.router.navigate(['./tarjeta'], navigationExtras);
+  }
+
 }

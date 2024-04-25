@@ -1,49 +1,69 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AlertController, ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-/*
-* Servicios genericos para 
-*
-*/
+import { AlertController } from '@ionic/angular';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MainServiceService {
-  // Variables Usar
-  accessToken='';
+  accessToken = '';
   usuarioInfo: any;
-  username: string = '';
-  urlFoto: string = '';
-  email: string = '';
+  username = '';
+  urlFoto = '';
+  email = '';
   titulos: string[] = [];
   logros: string[] = [];
   coleccion: string[] = [];
 
-  // Endpoints API
   URL_AUTHENTICATE = 'http://localhost:8000/api/autenticacion/token';
   URL_REGISTRO = 'http://localhost:8000/api/autenticacion/registro';
   URL_RESET_PASS = 'http://localhost:8000/api/autenticacion/actualizar/contrasena';
   URL_INFO_USER = 'http://localhost:8000/api/obtener/info/usuario';
-  URL_ITEM_LIST = 'http://localhost:8000/api/items/obtener/items';
-  URL_ITEM_LIST_CAT = 'http://localhost:8000/api/items/obtener/item/{categoria}/{id_item}';
-  URL_INSERT_ITEM = 'http://localhost:8000/api/items/insertar/item/';
-  URL_UPDATE_ITEM = 'http://localhost:8000/api/items/actualizar/item/';
-  URL_DELETE_ITEM = 'http://localhost:8000/api/items/eliminar/item/{categoria}/{id_item}';
-  URL_ADD_CAT = 'http://localhost:8000/api/categorias/agregar/categoria/{nombre_categoria}';
   URL_TOP_10 = 'http://localhost:8000/api/obtener/top/10';
   URL_VALIDATE_USER = 'http://localhost:8000/api/autenticacion/validar/usuario/{usuario}/{email}';
-  URL_INSERT_TITLE = 'http://localhost:8000/api/gamificacion/insertar/{titulos}';
-  URL_INSERT_ACHIEVEMENT ='http://localhost:8000/api/gamificacion/insertar/{logros}';
+  URL_INSERT_TITLE = 'http://localhost:8000/api/gamificacion/insertar/titulos';
 
+  constructor(private alertController: AlertController, private httpClient: HttpClient) { }
+  //titulos
+  asignarTitulos(usuario: any): Observable<any> {
+    const condicionesTitulos = [
+      { titulo: 'Aficionado', coleccionesMinimas: 2 },
+      { titulo: 'Coleccionista', coleccionesMinimas: 5 },
+      { titulo: 'Maestro', coleccionesMinimas: 6 }
+    ];
+    const tieneTitulo = (titulo: string) => usuario.titulos.includes(titulo);
 
+    condicionesTitulos.forEach(condicion => {
+      if (!tieneTitulo(condicion.titulo) && usuario.coleccion.length >= condicion.coleccionesMinimas) {
+        usuario.titulos.push(condicion.titulo);
+      }
+    });
 
-  constructor(private alertController: AlertController, public  httpClient : HttpClient) { }
-  //Calcular sistema de titulos
+    return this.actualizarInfoUsuario(usuario);
+  }
 
-  //calcular sistema de logros
+  private actualizarInfoUsuario(usuario: any): Observable<any> {
+    const titulosArray = usuario.titulos.map((titulo: any) => ({ nombre: titulo, fecha: new Date().toISOString().split('T')[0] }));
 
-  //Alertas
+    return this.httpClient.post(this.URL_INFO_USER, usuario).pipe(
+      switchMap(() => {
+        const body = JSON.stringify(titulosArray);
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.accessToken}`
+        });
+        return this.httpClient.post(this.URL_INSERT_TITLE, body, { headers });
+      }),
+      catchError((error) => {
+        return throwError('Error al actualizar información del usuario.');
+      })
+    );
+  }
+
+  //logros
+
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Alerta',

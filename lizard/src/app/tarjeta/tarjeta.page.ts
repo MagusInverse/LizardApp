@@ -25,7 +25,7 @@ export class TarjetaPage implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   generarTarjeta(){
 
   }

@@ -69,6 +69,30 @@ const routes: Routes = [
     path: 'modal-crear-videojuego',
     loadChildren: () => import('./modal-crear-videojuego/modal-crear-videojuego.module').then( m => m.ModalCrearVideojuegoPageModule)
   },
+  {
+    path: 'modal-tarjeta',
+    loadChildren: () => import('./modal-tarjeta/modal-tarjeta.module').then( m => m.ModalTarjetaPageModule)
+  },
+  {
+    path: 'libros',
+    loadChildren: () => import('./libros/libros.module').then( m => m.LibrosPageModule)
+  },
+  {
+    path: 'figuras',
+    loadChildren: () => import('./figuras/figuras.module').then( m => m.FigurasPageModule)
+  },
+  {
+    path: 'replicasdearmas',
+    loadChildren: () => import('./replicasdearmas/replicasdearmas.module').then( m => m.ReplicasdearmasPageModule)
+  },
+  {
+    path: 'cartas',
+    loadChildren: () => import('./cartas/cartas.module').then( m => m.CartasPageModule)
+  },
+  {
+    path: 'juegos',
+    loadChildren: () => import('./juegos/juegos.module').then( m => m.JuegosPageModule)
+  },
 
 
 
