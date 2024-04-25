@@ -97,8 +97,8 @@ export class MainServiceService {
     return this.httpClient.get(url);
   }
 
-  obtenerTierUser(){
-
+  obtenerTop10Usuarios(): Observable<any> {
+    return this.httpClient.get(this.URL_TOP_10);
   }
 
   // Colecciones
