@@ -55,7 +55,7 @@ export class MainServiceService {
     );
   }
 
-  insertarTitulos(){
+  insertarTitulos(accessToken: any): Observable<any> {
     //llamar funcion obtener titulos
     //condicion 1{ titulo: 'Aficionado', coleccionesMinimas: 2 }
     //condicion 2{ titulo: 'Coleccionista', coleccionesMinimas: 5 }
@@ -66,7 +66,37 @@ export class MainServiceService {
     //si el usuario tiene el titulo no se inserta, si el usuario no lo tiene
     //se calcula el titulo que le corresponde segun su informacion
     //despues de calcular eso, insertar titulos con URL_INSERT_TITLE
+    return this.obtenerTitulos(accessToken).pipe(
+      switchMap(titulosUsuario => {
+        const tieneAficionado = titulosUsuario.includes('Aficionado');
+        const tieneColeccionista = titulosUsuario.includes('Coleccionista');
+        const tieneMaestro = titulosUsuario.includes('Maestro');
+        const titulosAInsertar = [];
+        if (!tieneAficionado && this.coleccion.length >= 2) {
+          titulosAInsertar.push({ nombre: 'Aficionado', fecha: new Date().toISOString() });
+        }
+        if (!tieneColeccionista && this.coleccion.length >= 5) {
+          titulosAInsertar.push({ nombre: 'Coleccionista', fecha: new Date().toISOString() });
+        }
+        if (!tieneMaestro && this.coleccion.length >= 6) {
+          titulosAInsertar.push({ nombre: 'Maestro', fecha: new Date().toISOString() });
+        }
+        if (titulosAInsertar.length > 0) {
+          const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+          });
 
+          return this.httpClient.post(this.URL_INSERT_TITLE, titulosAInsertar, { headers }).pipe(
+            catchError((error) => {
+              return throwError('Error al insertar los títulos.');
+            })
+          );
+        } else {
+          return new Observable<void>(); 
+        }
+      })
+    );
   }
 
   //logros
@@ -90,7 +120,9 @@ export class MainServiceService {
     //traer toda la info del usuario con URL_INFO_USER
     //verificar condiciones
     //si usaurio cumple condiciones llenar un array de logros
-    //despues de calcular eso, insertar titulos con URL_INSERT_logro
+    //si el usuario tiene el logro no se inserta, si el usuario no lo tiene
+    //se calcula el titulo que le corresponde segun su informacion
+    //despues de calcular eso, insertar titulos con URL_INSERT_ACHIVEMENT
 
   }
 
