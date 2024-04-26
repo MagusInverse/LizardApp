@@ -63,6 +63,8 @@ export class MainServiceService {
     //traer toda la info del usuario con URL_INFO_USER
     //verificar condiciones
     //si usaurio cumple condiciones llenar un array de titulos
+    //si el usuario tiene el titulo no se inserta, si el usuario no lo tiene
+    //se calcula el titulo que le corresponde segun su informacion
     //despues de calcular eso, insertar titulos con URL_INSERT_TITLE
 
   }

@@ -12,6 +12,9 @@
   </ion-header>
 
   <br>
+  <ion-item>
+    <ion-label>Recuerda que al generar tu tarjeta, tomale captura para guardar tu tarjeta y compartirla!</ion-label>
+  </ion-item>
   <!-- seleccionar el color -->
   <ion-item>
     <ion-label>Color principal</ion-label>
@@ -29,3 +32,10 @@
 <br>
   <ion-button expand="full" [routerLink]="['/modal-tarjeta']"(click)="generarTarjeta()" class="labels fuentes-cards" shape="round">Generar tarjeta</ion-button>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [routerLink]="['/login']">Salir</ion-button>
+    <ion-button>B</ion-button>
+    <ion-button>C</ion-button>
+  </ion-toolbar>
+</ion-footer>
