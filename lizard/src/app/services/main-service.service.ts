@@ -79,7 +79,13 @@ export class MainServiceService {
     body.append('username', usuario);
     body.append('password', clave);
 
-    return this.httpClient.post(this.URL_AUTHENTICATE, body);
+    // asignar el token para ser usado por el auth-guard service
+    const request = this.httpClient.post(this.URL_AUTHENTICATE, body);
+    request.subscribe((data: any) => {
+      this.accessToken = data.access_token;
+    })
+    return request;
+
   }
 
   informacionUsuario(accessToken: any): Observable<any> {
@@ -113,7 +119,7 @@ export class MainServiceService {
 
   validateUser(username: string, correo: string): Observable<any> {
     const url = this.URL_VALIDATE_USER.replace('{usuario}', username).replace('{email}', correo);
-    
+
     return this.httpClient.get(url);
   }
 

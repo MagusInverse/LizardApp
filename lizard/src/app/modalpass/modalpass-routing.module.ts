@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 import { ModalpassPage } from './modalpass.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ModalpassPage
+    component: ModalpassPage,
+    canActivate: [AuthGuardService]
   }
 ];
 
