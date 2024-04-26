@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IFigura} from '../coleccionInterfaces';
 
 @Component({
   selector: 'app-figuras',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./figuras.page.scss'],
 })
 export class FigurasPage implements OnInit {
+  figurasUsuario: IFigura[] = []; // array con las figuras que el usuario ha añadido a su colección
 
   constructor() { }
 

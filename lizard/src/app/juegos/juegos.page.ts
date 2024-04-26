@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IVideojuego} from '../coleccionInterfaces';
 
 @Component({
   selector: 'app-juegos',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./juegos.page.scss'],
 })
 export class JuegosPage implements OnInit {
+
+  juegosUsuario: IVideojuego[] = []; // array con los juegos que el usuario ha añadido a su colección
 
   constructor() { }
 
