@@ -93,6 +93,26 @@ const routes: Routes = [
     path: 'juegos',
     loadChildren: () => import('./juegos/juegos.module').then( m => m.JuegosPageModule)
   },
+  {
+    path: 'itemlibro',
+    loadChildren: () => import('./itemlibro/itemlibro.module').then( m => m.ItemlibroPageModule)
+  },
+  {
+    path: 'itemfigura',
+    loadChildren: () => import('./itemfigura/itemfigura.module').then( m => m.ItemfiguraPageModule)
+  },
+  {
+    path: 'itemreplica',
+    loadChildren: () => import('./itemreplica/itemreplica.module').then( m => m.ItemreplicaPageModule)
+  },
+  {
+    path: 'itemcarta',
+    loadChildren: () => import('./itemcarta/itemcarta.module').then( m => m.ItemcartaPageModule)
+  },
+  {
+    path: 'itemjuego',
+    loadChildren: () => import('./itemjuego/itemjuego.module').then( m => m.ItemjuegoPageModule)
+  },
 
 
 

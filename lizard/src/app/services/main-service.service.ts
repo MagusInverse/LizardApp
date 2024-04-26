@@ -26,6 +26,10 @@ export class MainServiceService {
   URL_INSERT_TITLE = 'http://localhost:8000/api/gamificacion/insertar/titulos';
   URL_INSERT_ACHIVEMENT = 'http://localhost:8000/api/gamificacion/insertar/logros';
   URL_ITEM_USUARIO = 'http://localhost:8000/api/items/obtener/items';
+  URL_INSERT_ITEM = 'http://localhost:8000/api/items/insertar/item/';
+  URL_MOD_ITEM = 'http://localhost:8000/api/items/actualizar/item/';
+  URL_DEL_ITEM = 'http://localhost:8000/api/items/eliminar/item/{categoria}/{id_item}';
+  URL_ITEM_CATEGORY = 'http://localhost:8000/api/items/obtener/item/{categoria}/{id_item}';
 
   constructor(private alertController: AlertController, private httpClient: HttpClient) { }
   //titulos
@@ -141,23 +145,60 @@ export class MainServiceService {
     return this.httpClient.get(this.URL_ITEM_USUARIO, { headers });
   }
 
-  obtenerItemCat(){
-    //llamar obtener colecciones usuario
-    //buscar la catergoria especifica (pasarla por parametro)
-    //listar todos los items de esa categoria
+  obtenerItemCat(categoria: string, idItem: string): Observable<any> {
+    const url = `${this.URL_ITEM_CATEGORY}${categoria}/${idItem}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.accessToken}`
+    });
+
+    return this.httpClient.get(url, { headers }).pipe(
+      catchError((error) => {
+        return throwError('Error al obtener el ítem por categoría.');
+      })
+    );
   }
 
   //crud items
-  actualizarItem(){
+  actualizarItem(itemData: any): Observable<any> {
+    // Agrega el ID al URL para actualizar el ítem específico
+    const url = `${this.URL_INSERT_ITEM}/${itemData._id}`; 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.accessToken}`
+    });
 
+    return this.httpClient.put(url, itemData, { headers }).pipe(
+      catchError((error) => {
+        return throwError('Error al actualizar el ítem.');
+      })
+    );
   }
 
-  insertarItem(){
+  insertarItem(itemData: any): Observable<any> {
+    const url = this.URL_INSERT_ITEM;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.accessToken}`
+    });
 
+    return this.httpClient.post(url, itemData, { headers }).pipe(
+      catchError((error) => {
+        return throwError('Error al insertar el ítem.');
+      })
+    );
   }
 
-  eliminarItem(){
+  deleteItem(categoria: string, idItem: string): Observable<any> {
+    const url = `${this.URL_DEL_ITEM}${categoria}/${idItem}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.accessToken}`
+    });
 
+    return this.httpClient.delete(url, { headers }).pipe(
+      catchError((error) => {
+        return throwError('Error al eliminar el ítem.');
+      })
+    );
   }
 
 }
