@@ -6,8 +6,7 @@
     }  
 
     .background {
-        background-image: url('../../assets/img/fondologin.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        --background: url('../../assets/img/fondologin2.png') center;
+        background-size: contain;
+
     }

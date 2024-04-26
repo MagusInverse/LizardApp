@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>tarjeta</ion-title>
+    <ion-title>Tarjeta</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,6 +26,6 @@
       <ion-select-option value="Georgia">Georgia</ion-select-option>
     </ion-select>
   </ion-item>
-
-  <ion-button expand="block" (click)="generarTarjeta()">Generar tarjeta</ion-button>
+<br>
+  <ion-button expand="full" [routerLink]="['/modal-tarjeta']"(click)="generarTarjeta()" class="labels fuentes-cards" shape="round">Generar tarjeta</ion-button>
 </ion-content>

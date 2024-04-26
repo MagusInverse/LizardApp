@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tarjeta',
@@ -21,12 +22,13 @@ export class TarjetaPage implements OnInit {
   cantCartas: number = 0;
 
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
+
 
   ngOnInit() {
   }
  
-  generarTarjeta(){
+  async generarTarjeta(){
 
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ILibro} from '../coleccionInterfaces';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -10,7 +11,9 @@ import {ILibro} from '../coleccionInterfaces';
 export class LibrosPage implements OnInit {
   librosUsuario: ILibro[] = []; // array con los libros que el usuario ha añadido a su colección
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
+
+  async abrirModal() {}
 
   ngOnInit() {
   }

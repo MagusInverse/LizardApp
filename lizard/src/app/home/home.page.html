@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label>
-      <h1>Bienvenido</h1>
+      <ion-img class="logo-container" src="assets/img/loginicon.png" alt="Logo de la aplicación"></ion-img><h1>Home</h1>
     </ion-label>
   </ion-item>
 
@@ -28,15 +28,15 @@
   </ion-card>
   <br>
   <br>
-  <ion-button expand="full" (click)="categoria()">Categoria</ion-button>
+  <ion-button expand="full" (click)="categoria()" class="labels" color="dark">Categoria</ion-button>
   <br>
-  <ion-button expand="full" (click)="top10()">Top 10</ion-button>
+  <ion-button expand="full" (click)="top10()" class="labels" color="dark">Top 10</ion-button>
   <br>
-  <ion-button expand="full" (click)="logrosytitulos()">Logros y titulos</ion-button>
+  <ion-button expand="full" (click)="logrosytitulos()" class="labels" color="dark">Logros y titulos</ion-button>
   <br>
-  <ion-button expand="full" (click)="generartarjeta()">Generar Tarjeta</ion-button>
+  <ion-button expand="full" (click)="generartarjeta()" class="labels" color="dark">Generar Tarjeta</ion-button>
   <br>
-  <ion-button expand="full" [routerLink]="['/acercade']">Acerca de ...</ion-button>
+  <ion-button expand="full" [routerLink]="['/acercade']" class="labels" color="dark">Acerca de ...</ion-button>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
