@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +33,26 @@ export class MainServiceService {
   URL_ITEM_CATEGORY = 'http://localhost:8000/api/items/obtener/item/{categoria}/{id_item}';
 
   constructor(private alertController: AlertController, private httpClient: HttpClient) { }
-  //titulos
-  obtenerTitulos(){
-    //traer titulos del usaurio
 
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  //titulos
+  obtenerTitulos(accessToken: any): Observable<string[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${accessToken}`
+    });
+
+    return this.httpClient.get<any>(this.URL_INFO_USER, { headers }).pipe(
+      map(userData => userData.titulos)
+    );
   }
 
   insertarTitulos(){
@@ -51,8 +68,14 @@ export class MainServiceService {
   }
 
   //logros
-  obtenerLogros(){
-    //traer titulos del usaurio
+  obtenerLogros(accessToken: any): Observable<string[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${accessToken}`
+    });
+
+    return this.httpClient.get<any>(this.URL_INFO_USER, { headers }).pipe(
+      map(userData => userData.titulos)
+    );
   }
 
   insertarLogros(){
@@ -67,16 +90,6 @@ export class MainServiceService {
     //si usaurio cumple condiciones llenar un array de logros
     //despues de calcular eso, insertar titulos con URL_INSERT_logro
 
-  }
-
-  async presentAlert(msj: string) {
-    const alert = await this.alertController.create({
-      header: 'Alerta',
-      message: msj,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
   }
 
   inicioSesion(usuario: any, clave: any): Observable<any> {
