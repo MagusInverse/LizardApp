@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {IFiguraCreate} from '../coleccionInterfaces';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { MainServiceService } from '../services/main-service.service';
 
 @Component({
   selector: 'app-modal-crear-figura',
@@ -24,7 +26,17 @@ export class ModalCrearFiguraPage implements OnInit {
     empresa: "",
   }
 
-  constructor(private modalController: ModalController) { }
+  accessToken='';
+  category = '';
+
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController) {
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
+        this.category = this.router.getCurrentNavigation()?.extras?.state?.['categoryEnviado'];
+      }
+    })
+   }
 
 
   cerrarModal() {
