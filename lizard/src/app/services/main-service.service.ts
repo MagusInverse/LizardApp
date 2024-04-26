@@ -56,16 +56,6 @@ export class MainServiceService {
   }
 
   insertarTitulos(accessToken: any): Observable<any> {
-    //llamar funcion obtener titulos
-    //condicion 1{ titulo: 'Aficionado', coleccionesMinimas: 2 }
-    //condicion 2{ titulo: 'Coleccionista', coleccionesMinimas: 5 }
-    //condicion 3{ titulo: 'Maestro', coleccionesMinimas: 6 }
-    //traer toda la info del usuario con URL_INFO_USER
-    //verificar condiciones
-    //si usaurio cumple condiciones llenar un array de titulos
-    //si el usuario tiene el titulo no se inserta, si el usuario no lo tiene
-    //se calcula el titulo que le corresponde segun su informacion
-    //despues de calcular eso, insertar titulos con URL_INSERT_TITLE
     return this.obtenerTitulos(accessToken).pipe(
       switchMap(titulosUsuario => {
         const tieneAficionado = titulosUsuario.includes('Aficionado');
@@ -207,7 +197,6 @@ export class MainServiceService {
 
   //crud items
   actualizarItem(itemData: any): Observable<any> {
-    // Agrega el ID al URL para actualizar el ítem específico
     const url = `${this.URL_INSERT_ITEM}/${itemData._id}`; 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
