@@ -12,4 +12,26 @@ export class CategoriasPage implements OnInit {
   ngOnInit() {
   }
 
+  libros(){
+
+  }
+
+  figuras(){
+
+  }
+
+  replicas(){
+
+  }
+
+  cartas(){
+
+  }
+
+  juegos(){
+
+  }
+
+  
+
 }

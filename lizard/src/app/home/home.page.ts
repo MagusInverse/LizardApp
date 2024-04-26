@@ -37,6 +37,10 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
+  //traer toda las colecciones
+  //traer toda la info del usaurio
+  //traer todos los titulos del usuario
+
   ngOnInit() {
     this.presentAlert('Bienvenid@');
     this.servicio.informacionUsuario(this.accessToken).subscribe(

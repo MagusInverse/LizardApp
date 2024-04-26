@@ -24,45 +24,46 @@ export class MainServiceService {
   URL_TOP_10 = 'http://localhost:8000/api/obtener/top/10';
   URL_VALIDATE_USER = 'http://localhost:8000/api/autenticacion/validar/usuario/{usuario}/{email}';
   URL_INSERT_TITLE = 'http://localhost:8000/api/gamificacion/insertar/titulos';
+  URL_INSERT_ACHIVEMENT = 'http://localhost:8000/api/gamificacion/insertar/logros';
+  URL_ITEM_USUARIO = 'http://localhost:8000/api/items/obtener/items';
 
   constructor(private alertController: AlertController, private httpClient: HttpClient) { }
   //titulos
-  asignarTitulos(usuario: any): Observable<any> {
-    const condicionesTitulos = [
-      { titulo: 'Aficionado', coleccionesMinimas: 2 },
-      { titulo: 'Coleccionista', coleccionesMinimas: 5 },
-      { titulo: 'Maestro', coleccionesMinimas: 6 }
-    ];
-    const tieneTitulo = (titulo: string) => usuario.titulos.includes(titulo);
+  obtenerTitulos(){
+    //traer titulos del usaurio
 
-    condicionesTitulos.forEach(condicion => {
-      if (!tieneTitulo(condicion.titulo) && usuario.coleccion.length >= condicion.coleccionesMinimas) {
-        usuario.titulos.push(condicion.titulo);
-      }
-    });
-
-    return this.actualizarInfoUsuario(usuario);
   }
 
-  private actualizarInfoUsuario(usuario: any): Observable<any> {
-    const titulosArray = usuario.titulos.map((titulo: any) => ({ nombre: titulo, fecha: new Date().toISOString().split('T')[0] }));
+  insertarTitulos(){
+    //llamar funcion obtener titulos
+    //condicion 1{ titulo: 'Aficionado', coleccionesMinimas: 2 }
+    //condicion 2{ titulo: 'Coleccionista', coleccionesMinimas: 5 }
+    //condicion 3{ titulo: 'Maestro', coleccionesMinimas: 6 }
+    //traer toda la info del usuario con URL_INFO_USER
+    //verificar condiciones
+    //si usaurio cumple condiciones llenar un array de titulos
+    //despues de calcular eso, insertar titulos con URL_INSERT_TITLE
 
-    return this.httpClient.post(this.URL_INFO_USER, usuario).pipe(
-      switchMap(() => {
-        const body = JSON.stringify(titulosArray);
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.accessToken}`
-        });
-        return this.httpClient.post(this.URL_INSERT_TITLE, body, { headers });
-      }),
-      catchError((error) => {
-        return throwError('Error al actualizar información del usuario.');
-      })
-    );
   }
 
   //logros
+  obtenerLogros(){
+    //traer titulos del usaurio
+  }
+
+  insertarLogros(){
+    //llamar funcion obtener logros
+    //condicion 1{ logro: 'A', itemsminimo: 1 }
+    //condicion 1{ logro: 'B', itemsminimo: 2 }
+    //condicion 1{ logro: 'C', itemsminimo: 5 }
+    //condicion 1{ logro: 'D', itemsminimo: 10 }
+    //condicion 1{ logro: 'E', itemsminimo: 20 }
+    //traer toda la info del usuario con URL_INFO_USER
+    //verificar condiciones
+    //si usaurio cumple condiciones llenar un array de logros
+    //despues de calcular eso, insertar titulos con URL_INSERT_logro
+
+  }
 
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
@@ -104,6 +105,10 @@ export class MainServiceService {
       url_foto: url
     };
 
+    //al registrar usuario se debe insertar automaticamente el titulo novato
+    //fecha del insert de titulo se otorga al momento de crear la cuenta
+    //insertar todas las categorias al crear usaurio
+
     return this.httpClient.post(this.URL_REGISTRO, userData);
   }
 
@@ -128,15 +133,21 @@ export class MainServiceService {
   }
 
   // Colecciones
+  obtenerColeccionUsuario(accessToken: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${accessToken}`
+    });
 
-  obtenerItemsColeccion(){
-
+    return this.httpClient.get(this.URL_ITEM_USUARIO, { headers });
   }
 
-  obtenerItemCatId(){
-
+  obtenerItemCat(){
+    //llamar obtener colecciones usuario
+    //buscar la catergoria especifica (pasarla por parametro)
+    //listar todos los items de esa categoria
   }
 
+  //crud items
   actualizarItem(){
 
   }
@@ -145,7 +156,8 @@ export class MainServiceService {
 
   }
 
-  agregarCategoriaUsuario(){
+  eliminarItem(){
 
   }
+
 }
