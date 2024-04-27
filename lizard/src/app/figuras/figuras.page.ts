@@ -12,7 +12,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class FigurasPage implements OnInit {
   figurasUsuario: any[] = [];
-  accessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmExIn0.xZlk8Zk0iBwi74_SQhxHUOMT01arOSP-Dz0zLPfT6dg';
+  accessToken='';
   category = 'figuras';
   iditem = '';
 
