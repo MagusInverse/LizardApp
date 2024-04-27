@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import {ILibroCreate} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-crear-libro',
@@ -29,10 +30,10 @@ export class ModalCrearLibroPage implements OnInit {
     anio_publicacion: 0,
   }
 
-  accessToken='';
+  accessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmExIiwiZXhwIjoxNzE0MjA3NjIzfQ.FzbppOGpc7vRN-bUGravx8mWZhf6rl73l1G0h5W89f0';
   category = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController, private servicio: MainServiceService, private alertController: AlertController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -40,6 +41,16 @@ export class ModalCrearLibroPage implements OnInit {
       }
     })
    }
+  
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
 
   cerrarModal() {
@@ -47,6 +58,23 @@ export class ModalCrearLibroPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  agregarItem(){
+    this.servicio.insertarItem(this.libro, this.accessToken).subscribe(
+      (response) => {
+        this.presentAlert('Item actualizado exitosamente.');
+        let navigationExtras: NavigationExtras = {
+          state: {
+            accessTokenEnviado: this.accessToken
+          }
+        }
+        this.router.navigate(['/categorias'], navigationExtras);
+      },
+      (error) => {
+        this.presentAlert(JSON.stringify(error));
+      }
+    );
   }
 
 }

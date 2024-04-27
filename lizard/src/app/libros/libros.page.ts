@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ILibro} from '../coleccionInterfaces';
-import { ModalController } from '@ionic/angular';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
+import { AlertController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -11,12 +10,13 @@ import { MainServiceService } from '../services/main-service.service';
   styleUrls: ['./libros.page.scss'],
 })
 export class LibrosPage implements OnInit {
-  librosUsuario: ILibro[] = []; // array con los libros que el usuario ha añadido a su colección
-  accessToken='';
-  category = 'cartas';
-  iditem = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService) {
+  accessToken='';
+  category = 'libros';
+  iditem = '';
+  librosUsuario: any[] = [];
+
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -24,7 +24,18 @@ export class LibrosPage implements OnInit {
     })
    }
 
-  item(){
+   async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  item(id: string){
+    this.iditem = id;
     let navigationExtras: NavigationExtras = {
       state: {
         accessTokenEnviado: this.accessToken,
@@ -46,6 +57,32 @@ export class LibrosPage implements OnInit {
   }
 
   ngOnInit() {
+    this.servicio.obtenerColeccionUsuario(this.accessToken).subscribe((data: any) => {
+      if (data && data.libros) {
+        this.librosUsuario = data.libros.map((libro: any) => ({
+          nombre: libro.nombre,
+          url_foto: libro.url_foto,
+          _id: libro._id
+        }));
+      }
+    });
   }
 
+  home(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/home'], navigationExtras);
+  }
+
+  crearTarjeta(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/tarjeta'], navigationExtras);
+  }
 }

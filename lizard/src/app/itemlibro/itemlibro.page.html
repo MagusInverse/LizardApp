@@ -1,20 +1,81 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>itemlibro</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <img src="../../assets/img/LIBROICONO.png" style="width: 50%;"/>
+        </ion-col>  
+        <ion-col size="9">
+          <ion-title>Libro</ion-title> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">itemlibro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <img [src]="libro.url_foto" />
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="book-outline"></ion-icon> Nombre: </ion-label>
+    <ion-input readonly [(ngModel)]="libro.nombre" id="nombre" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('nombre')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels"><ion-icon name="link-outline"></ion-icon> Url foto: </ion-label>
+    <ion-input readonly [(ngModel)]="libro.url_foto" id="url_foto" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('url_foto')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels"><ion-icon name="book-outline"></ion-icon> Tipo: </ion-label>
+    <ion-input readonly [(ngModel)]="libro.tipo" id="tipo" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('tipo')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-input readonly [(ngModel)]="libro.fecha_adquisicion" id="fecha_adquisicion" type="text"></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('fecha_adquisicion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon>Autor:  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.autor" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon>Editorial:  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.editorial" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon>Genero:  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.genero" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Paginas:  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.paginas" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Año:  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.anio_publicacion" type="text" ></ion-input>
+  </ion-item>
+
+
+  <ion-button (click)="actualizarItem()">Modificar</ion-button>
+  <ion-button (click)="eliminarItem()">Eliminar</ion-button>
 </ion-content>
+
 <ion-footer>
   <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+    <ion-button [routerLink]="['/login']"><ion-icon name="exit-outline"></ion-icon></ion-button>
+    <ion-button (click)="home()"><ion-icon name="home-outline"></ion-icon></ion-button>
+    <ion-button (click)="crearTarjeta()"><ion-icon name="id-card-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-footer>

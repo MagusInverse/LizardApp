@@ -182,59 +182,44 @@ export class MainServiceService {
     return this.httpClient.get(this.URL_ITEM_USUARIO, { headers });
   }
 
-  obtenerItemCat(categoria: string, idItem: string): Observable<any> {
-    const url = `${this.URL_ITEM_CATEGORY}${categoria}/${idItem}`;
+  obtenerItemCat(categoria: string, idItem: string, accessToken: any): Observable<any> {
+    const url = this.URL_ITEM_CATEGORY.replace('{categoria}', categoria).replace('{id_item}', idItem);
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.accessToken}`
+      'Authorization': `Bearer ${accessToken}`
     });
 
-    return this.httpClient.get(url, { headers }).pipe(
-      catchError((error) => {
-        return throwError('Error al obtener el ítem por categoría.');
-      })
-    );
+    return this.httpClient.get(url, { headers });
   }
 
   //crud items
-  actualizarItem(itemData: any): Observable<any> {
-    const url = `${this.URL_INSERT_ITEM}/${itemData._id}`; 
+  actualizarItem(data: any, accessToken: string): Observable<any> {
+    const url = this.URL_MOD_ITEM;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.accessToken}`
+      'Authorization': `Bearer ${accessToken}`
     });
-
-    return this.httpClient.put(url, itemData, { headers }).pipe(
-      catchError((error) => {
-        return throwError('Error al actualizar el ítem.');
-      })
-    );
+  
+    return this.httpClient.put(url, data, { headers });
   }
+  
 
-  insertarItem(itemData: any): Observable<any> {
+  insertarItem(itemData: any, accessToken: any): Observable<any> {
     const url = this.URL_INSERT_ITEM;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.accessToken}`
+      'Authorization': `Bearer ${accessToken}`
     });
 
-    return this.httpClient.post(url, itemData, { headers }).pipe(
-      catchError((error) => {
-        return throwError('Error al insertar el ítem.');
-      })
-    );
+    return this.httpClient.post(url, itemData, { headers });
   }
 
-  deleteItem(categoria: string, idItem: string): Observable<any> {
-    const url = `${this.URL_DEL_ITEM}${categoria}/${idItem}`;
+  deleteItem(categoria: string, idItem: string, accessToken: any): Observable<any> {
+    const url = this.URL_DEL_ITEM.replace('{categoria}', categoria).replace('{id_item}', idItem);
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.accessToken}`
+      'Authorization': `Bearer ${accessToken}`
     });
 
-    return this.httpClient.delete(url, { headers }).pipe(
-      catchError((error) => {
-        return throwError('Error al eliminar el ítem.');
-      })
-    );
+    return this.httpClient.delete(url, { headers });
   }
 
 }
