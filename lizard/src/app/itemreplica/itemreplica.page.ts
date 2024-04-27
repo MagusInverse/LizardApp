@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {IArma} from '../coleccionInterfaces';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { MainServiceService } from '../services/main-service.service';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-itemreplica',
@@ -21,9 +24,31 @@ export class ItemreplicaPage implements OnInit {
     tamano: 0,
     peso: 0,
     fabricante: "",
-}
+  }
 
-  constructor() { }
+  accessToken='';
+  category = '';
+  iditem = '';
+
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
+        this.category = this.router.getCurrentNavigation()?.extras?.state?.['categoryEnviado'];
+        this.iditem = this.router.getCurrentNavigation()?.extras?.state?.['iditemEnviado'];
+      }
+    })
+  }
+
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
   cambiarEstadoEditable(idElemento: string) {
     let elemento = document.getElementById(idElemento);
@@ -41,15 +66,70 @@ export class ItemreplicaPage implements OnInit {
   }
 
   actualizarItem(){
-    console.log("Actualizar item basado en el _id del item");
+    this.servicio.actualizarItem(this.arma, this.accessToken).subscribe(
+      (response) => {
+        this.presentAlert('Item actualizado exitosamente.');
+      },
+      (error) => {
+        this.presentAlert(JSON.stringify(error));
+      }
+    );
   }
 
 
   eliminarItem(){
-    console.log("Eliminar item basado en el _id del item");
+    this.servicio.deleteItem(this.category, this.iditem, this.accessToken).subscribe(
+      (response) => {
+        this.presentAlert('Item eliminado.');
+        let navigationExtras: NavigationExtras = {
+          state: {
+            accessTokenEnviado: this.accessToken
+          }
+        }
+        this.router.navigate(['/categorias'], navigationExtras);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  home(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/home'], navigationExtras);
+  }
+
+  crearTarjeta(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/tarjeta'], navigationExtras);
   }
 
   ngOnInit() {
+    this.servicio.obtenerItemCat(this.category, this.iditem, this.accessToken).subscribe(
+      (data: any) => {
+        this.arma.fecha_adquisicion = data.fecha_adquisicion;
+        this.arma.url_foto = data.url_foto;
+        this.arma.nombre = data.nombre;
+        this.arma.tipo = data.tipo;
+        this.arma.descripcion = data.descripcion;
+        this.arma.material = data.material;
+        this.arma.tamano = data.tamano;
+        this.arma.peso = data.peso;
+        this.arma.fabricante = data.fabricante;
+        this.arma._id = this.iditem;
+      },
+      (error) => {
+        console.log(error);
+      } 
+    );
   }
 
 }

@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import {IArmaCreate} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-crear-arma',
@@ -30,7 +31,7 @@ export class ModalCrearArmaPage implements OnInit {
 accessToken='';
 category = '';
 
-constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController) {
+constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController, private servicio: MainServiceService, private alertController: AlertController) {
   this.activedRouter.queryParams.subscribe(param=>{
     if(this.router.getCurrentNavigation()?.extras.state){
       this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -39,12 +40,39 @@ constructor(private activedRouter: ActivatedRoute, private router: Router, priva
   })
  }
 
+async presentAlert(msj: string) {
+  const alert = await this.alertController.create({
+    header: 'Alerta',
+    message: msj,
+    buttons: ['OK'],
+  });
 
-  cerrarModal() {
-    this.modalController.dismiss();
-  }
+  await alert.present();
+}
+
+
+cerrarModal() {
+  this.router.navigate(['./replicadearmas']);
+}
 
   ngOnInit() {
+  }
+
+  agregarItem(){
+    this.servicio.insertarItem(this.arma, this.accessToken).subscribe(
+      (response) => {
+        this.presentAlert('Item actualizado exitosamente.');
+        let navigationExtras: NavigationExtras = {
+          state: {
+            accessTokenEnviado: this.accessToken
+          }
+        }
+        this.router.navigate(['/categorias'], navigationExtras);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
 
