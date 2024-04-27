@@ -11,8 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalTarjetaPage implements OnInit {
 
-  //accessToken='';
-  accessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmExIiwiZXhwIjoxNzE0MTg4MjU4fQ.aSLyWW92x0vf3rb6j9dae-1gUv9-PW8dgxledOmT4yU';
+  accessToken='';
   usuarioInfo: any;
   username: string = '';
   urlFoto: string = '';
