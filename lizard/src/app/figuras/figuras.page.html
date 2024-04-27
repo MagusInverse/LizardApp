@@ -9,24 +9,18 @@
   <br>
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
-      <ion-card>
-        <img src="../../assets/img/FIGURA01.png"/>
-        <ion-card-header>
-        <ion-card-title class="labels fuentes-cards">Nombre Figura</ion-card-title>
-        <ion-card-subtitle>Tipo de Figura</ion-card-subtitle>
-        </ion-card-header>
-    
-        <ion-card-content>
-        Datos de la figura
-        </ion-card-content>
-      </ion-card>
+      <ion-col size="6" *ngFor="let figura of figurasUsuario">
+        <ion-card (click)="item(figura._id)">
+          <img [src]="figura.url_foto" />
+          <ion-card-header>
+            <ion-card-title class="labels fuentes-cards">{{ figura.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{ figura._id }}
+          </ion-card-content>
+        </ion-card>
       </ion-col>
-
-      <ion-col size="6">
-        <!--Si se quiere usar otra card, copiar la de arriba-->
-      </ion-col>
-    </ion-row> 
+    </ion-row>
   </ion-grid>
 
 </ion-content>
@@ -36,10 +30,10 @@
     <ion-button [routerLink]="['/login']">
       <ion-icon name="exit-outline"></ion-icon>
     </ion-button>
-    <ion-button [routerLink]="['/home']">
+    <ion-button  (click)="home()">
       <ion-icon name="home-outline"></ion-icon>
     </ion-button>
-    <ion-button [routerLink]="['/tarjeta']">
+    <ion-button (click)="crearTarjeta()">
       <ion-icon name="id-card-outline"></ion-icon>
     </ion-button>
   </div>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {IFigura} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-figuras',
@@ -10,23 +11,42 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./figuras.page.scss'],
 })
 export class FigurasPage implements OnInit {
-  figurasUsuario: IFigura[] = []; // array con las figuras que el usuario ha añadido a su colección
-  accessToken='';
-  category = 'cartas';
+  figurasUsuario: any[] = [];
+  accessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmExIn0.xZlk8Zk0iBwi74_SQhxHUOMT01arOSP-Dz0zLPfT6dg';
+  category = 'figuras';
   iditem = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
       }
     })
-   }
-
-  ngOnInit() {
   }
 
-  item(){
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  ngOnInit() {
+    this.servicio.obtenerColeccionUsuario(this.accessToken).subscribe((data: any) => {
+      if (data && data.figuras) {
+        this.figurasUsuario = data.figuras.map((figuras: any) => ({
+          nombre: figuras.nombre,
+          url_foto: figuras.url_foto,
+          _id: figuras._id
+        }));
+      }
+    });
+  }
+
+  item(id: string){
     let navigationExtras: NavigationExtras = {
       state: {
         accessTokenEnviado: this.accessToken,
@@ -45,6 +65,24 @@ export class FigurasPage implements OnInit {
       }
     }
     this.router.navigate(['./modal-crear-figura'], navigationExtras);
+  }
+
+  home(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/home'], navigationExtras);
+  }
+
+  crearTarjeta(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/tarjeta'], navigationExtras);
   }
 
 }

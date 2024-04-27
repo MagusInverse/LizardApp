@@ -30,7 +30,7 @@ export class ModalCrearLibroPage implements OnInit {
     anio_publicacion: 0,
   }
 
-  accessToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwcnVlYmExIiwiZXhwIjoxNzE0MjA3NjIzfQ.FzbppOGpc7vRN-bUGravx8mWZhf6rl73l1G0h5W89f0';
+  accessToken='';
   category = '';
 
   constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController, private servicio: MainServiceService, private alertController: AlertController) {
