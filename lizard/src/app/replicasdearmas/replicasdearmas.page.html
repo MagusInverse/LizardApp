@@ -1,20 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>replicasdearmas</ion-title>
+    <ion-title class="fuentes-cards" ><ion-icon name="skull-outline"></ion-icon> Réplicas de Armas</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<br>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">replicasdearmas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button expand="full" [routerLink]="['/modal-crear-arma']" (click)="abrirModal()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar (+)</ion-button>
+  <br>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+      <ion-card>
+        <img src="../../assets/img/ARMA02.png"/>
+        <ion-card-header>
+        <ion-card-title class="labels fuentes-cards">Tipo de Réplica</ion-card-title>
+        <ion-card-subtitle>Modelo de Réplica</ion-card-subtitle>
+        </ion-card-header>
+    
+        <ion-card-content>
+        Datos de Réplica
+        </ion-card-content>
+      </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <!--Si se quiere usar otra card, copiar la de arriba-->
+      </ion-col>
+    </ion-row> 
+  </ion-grid>
+
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+  </div>
   </ion-toolbar>
 </ion-footer>

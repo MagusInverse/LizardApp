@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {IFigura} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-figuras',
