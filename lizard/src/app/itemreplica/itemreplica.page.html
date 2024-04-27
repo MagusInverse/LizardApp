@@ -43,7 +43,7 @@
 
   <ion-item>
     <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
-    <ion-input readonly [(ngModel)]="arma.fecha_adquisicion" id="fecha_adquisicion" type="text"></ion-input>
+    <ion-input readonly [(ngModel)]="arma.fecha_adquisicion" id="fecha_adquisicion" type="text" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"></ion-input>
     <ion-button (click)="cambiarEstadoEditable('fecha_adquisicion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
   </ion-item>
 
@@ -81,6 +81,7 @@
 
   <ion-button (click)="actualizarItem()">Modificar</ion-button>
   <ion-button (click)="eliminarItem()">Eliminar</ion-button>
+
 </ion-content>
 <ion-footer>
   <ion-toolbar>
