@@ -16,7 +16,6 @@ from app.dependencias.dependencia_bdd import obtener_bdd
 from app.configuracion import ConfiguracionOauth2
 ALGORITMO_ENCRIPTADO = ConfiguracionOauth2.ALGORITMO_ENCRIPTADO.value
 CLAVE_SECRETA = ConfiguracionOauth2.CLAVE_SECRETA.value
-TOKEN_EXPIRACION_MINUTOS = ConfiguracionOauth2.TOKEN_EXPIRACION_MINUTOS.value
 
 #importar dependencia de base de datos
 from pymongo.mongo_client import MongoClient
@@ -43,14 +42,10 @@ def validar_usuario(username: str, password: str, bdd: MongoClient):
     else: # contraseña incorrecta
         return False
 
+
 # Crear un JWT para ser devuelto al usuario en la ruta de login
-def crear_jwt(data: dict, expires_delta: timedelta = None):
+def crear_jwt(data: dict):
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.now(timezone.utc) + expires_delta
-    else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=15)
-    to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, CLAVE_SECRETA, algorithm=ALGORITMO_ENCRIPTADO)
     return encoded_jwt
 
@@ -82,10 +77,7 @@ async def login(bdd: dependencia_bdd, form_data: Annotated[OAuth2PasswordRequest
                 detail="nombre de usuario o contraseña incorrectos",
                 headers={"WWW-Authenticate": "Bearer"},
                 )
-    token_expiracion = timedelta(minutes=TOKEN_EXPIRACION_MINUTOS)
-    token = crear_jwt(
-            data={"sub": usuario}, expires_delta=token_expiracion
-            )
+    token = crear_jwt(data={"sub": usuario})
     return Token(access_token=token, token_type="bearer")
 
 # endpoint para registrar un usuario
