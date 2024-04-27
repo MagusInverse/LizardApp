@@ -1,15 +1,86 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>itemreplica</ion-title>
+    <ion-title>Réplica de arma</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">itemreplica</ion-title>
+      <ion-title size="large">Réplica de arma</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="book-outline"></ion-icon> Nombre de la arma</ion-label>
+    <ion-input readonly [(ngModel)]="arma.nombre" id="nombre" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('nombre')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label  class="labels"><ion-icon name="link-outline"></ion-icon> Foto de la arma</ion-label>
+    <ion-input readonly [(ngModel)]="arma.url_foto" id="url_foto" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('url_foto')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label  class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de arma</ion-label>
+    <ion-input readonly [(ngModel)]="arma.tipo" id="tipo" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('tipo')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label  class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
+    <ion-input readonly [(ngModel)]="arma.descripcion" id="descripcion" type="text" ></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('descripcion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-input readonly [(ngModel)]="arma.fecha_adquisicion" id="fecha_adquisicion" type="text"></ion-input>
+    <ion-button (click)="cambiarEstadoEditable('fecha_adquisicion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <br>
+
+  <!-- inputs de datos especificos para un arma -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Material </ion-label>
+    <ion-input readonly [(ngModel)]="arma.material" type="text" ></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tamaño </ion-label>
+    <ion-input readonly [(ngModel)]="arma.tamano" type="text" ></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Peso </ion-label>
+    <ion-input readonly [(ngModel)]="arma.peso" type="text" ></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Fabricante </ion-label>
+    <ion-input readonly [(ngModel)]="arma.fabricante" type="text" ></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-button (click)="actualizarItem()">Modificar</ion-button>
+  <ion-button (click)="eliminarItem()">Eliminar</ion-button>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
