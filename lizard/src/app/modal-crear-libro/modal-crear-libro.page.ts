@@ -72,7 +72,7 @@ export class ModalCrearLibroPage implements OnInit {
         this.router.navigate(['/categorias'], navigationExtras);
       },
       (error) => {
-        this.presentAlert(JSON.stringify(error));
+        console.log(error);
       }
     );
   }
