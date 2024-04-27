@@ -1,26 +1,35 @@
-<ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-label>
-      <h1>Categorías</h1>
-    </ion-label>
-  </ion-item>
-
-  <br>
-  <br>
-  <ion-button (click)="libros()" expand="full">Libros</ion-button>
-  <br>
-  <ion-button (click)="figuras()" expand="full">Figuras</ion-button>
-  <br>
-  <ion-button (click)="replicas()" expand="full">Réplicas de Armas</ion-button>
-  <br>
-  <ion-button (click)="cartas()" expand="full">Cartas</ion-button>
-  <br>
-  <ion-button (click)="juegos()" expand="full">Juegos</ion-button>
-</ion-content>
-<ion-footer>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+    <ion-title class="fuentes-cards"><ion-icon name="grid-outline"></ion-icon> Categorías</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <br>
+  <br>
+  <ion-button class="labels fuentes-cards boton-agregar" (click)="libros()" expand="full" shape="round">Libros</ion-button>
+  <br>
+  <ion-button class="labels fuentes-cards boton-agregar" (click)="figuras()" expand="full" shape="round">Figuras</ion-button>
+  <br>
+  <ion-button class="labels fuentes-cards boton-agregar" (click)="replicas()" expand="full" shape="round">Réplicas de Armas</ion-button>
+  <br>
+  <ion-button class="labels fuentes-cards boton-agregar" (click)="cartas()" expand="full" shape="round">Cartas</ion-button>
+  <br>
+  <ion-button class="labels fuentes-cards boton-agregar" (click)="juegos()" expand="full" shape="round">Juegos</ion-button>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+  </div>
   </ion-toolbar>
 </ion-footer>
