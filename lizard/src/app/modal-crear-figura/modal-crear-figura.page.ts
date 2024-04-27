@@ -50,7 +50,7 @@ export class ModalCrearFiguraPage implements OnInit {
 
 
   cerrarModal() {
-    this.modalController.dismiss();
+    this.router.navigate(['./replicasdearmas']);
   }
 
   ngOnInit() {

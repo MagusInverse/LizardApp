@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ICarta} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-cartas',
@@ -10,12 +11,12 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./cartas.page.scss'],
 })
 export class CartasPage implements OnInit {
-  cartasUsuario: ICarta[] = []; 
+  cartasUsuario: any[] = [];
   accessToken='';
   category = 'cartas';
   iditem = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -23,10 +24,29 @@ export class CartasPage implements OnInit {
     })
    }
 
-  ngOnInit() {
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
-  item(){
+  ngOnInit() {
+    this.servicio.obtenerColeccionUsuario(this.accessToken).subscribe((data: any) => {
+      if (data && data.cartas) {
+        this.cartasUsuario = data.cartas.map((cartas: any) => ({
+          nombre: cartas.nombre,
+          url_foto: cartas.url_foto,
+          _id: cartas._id
+        }));
+      }
+    });
+  }
+
+  item(id: string){
     let navigationExtras: NavigationExtras = {
       state: {
         accessTokenEnviado: this.accessToken,
@@ -45,6 +65,24 @@ export class CartasPage implements OnInit {
       }
     }
     this.router.navigate(['./modal-crear-carta'], navigationExtras);
+  }
+
+  home(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/home'], navigationExtras);
+  }
+
+  crearTarjeta(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/tarjeta'], navigationExtras);
   }
 
 }
