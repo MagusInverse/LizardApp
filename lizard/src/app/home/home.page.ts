@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   titulos: string[] = [];
   logros: string[] = [];
   coleccion: string[] = [];
+  tituloActual: string = '';
 
   constructor(private activedRouter: ActivatedRoute, private alertController: AlertController, private router: Router, private servicio: MainServiceService) {
     this.activedRouter.queryParams.subscribe(param=>{
@@ -36,10 +37,6 @@ export class HomePage implements OnInit {
 
     await alert.present();
   }
-
-  //traer toda las colecciones
-  //traer toda la info del usaurio
-  //traer todos los titulos del usuario
 
   ngOnInit() {
     this.presentAlert('Bienvenid@');
