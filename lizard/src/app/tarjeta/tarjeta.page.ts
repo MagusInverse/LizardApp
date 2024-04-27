@@ -10,7 +10,9 @@ import { MainServiceService } from '../services/main-service.service';
 })
 export class TarjetaPage implements OnInit {
   // configuración de la tarjeta (color y fuente)
-  colorTarjeta: string = '';
+  colorTarjeta1: string = '';
+  colorTarjeta2: string = '';
+  colorTarjeta3: string = '';
   fuenteTarjeta: string = '';
   // datos del usuario
   urlFoto: string = '';
@@ -42,7 +44,9 @@ export class TarjetaPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: {
         accessTokenEnviado: this.accessToken,
-        colorTarjetaEnviado: this.colorTarjeta,
+        colorTarjetaEnviado1: this.colorTarjeta1,
+        colorTarjetaEnviado2: this.colorTarjeta2,
+        colorTarjetaEnviado3: this.colorTarjeta3,
         fuenteTarjetaEnviado: this.fuenteTarjeta
       }
     }

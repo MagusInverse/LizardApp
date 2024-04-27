@@ -1,6 +1,15 @@
-<ion-content [fullscreen]="true">
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" >
   <!-- Primera franja -->
-  <ion-grid>
+  <ion-grid [style.background-color]="colorFondo1">
     <ion-row>
       <ion-col size="6">
         <img alt="Imagen de perfil" style="width: 90%;" [src]="urlFoto">
@@ -17,44 +26,47 @@
   </ion-grid> 
 
   <!-- Segunda franja -->
-  <ion-grid> 
+  <ion-grid [style.background-color]="colorFondo2"> 
     <ion-row>
       <ion-col size="6">
         <ion-title>Títulos</ion-title>
         <ion-list>
         <ion-item>
-          <ion-label>Novato</ion-label><ion-icon name="remove-outline"></ion-icon>
+          <ion-label [style.color]="colorTextot1">Novato</ion-label><ion-icon name="remove-outline" [style.color]="colorTextot1"></ion-icon>
         </ion-item>
+        <br>
         <ion-item>
-          <ion-label>Aficionado</ion-label><ion-icon name="reorder-two-outline"></ion-icon>
+          <ion-label [style.color]="colorTextot2">Aficionado</ion-label><ion-icon name="reorder-two-outline" [style.color]="colorTextot2"></ion-icon>
         </ion-item>
+        <br>
         <ion-item>
-          <ion-label>Coleccionista</ion-label><ion-icon name="reorder-three-outline"></ion-icon>
+          <ion-label [style.color]="colorTextot3">Coleccionista</ion-label><ion-icon name="reorder-three-outline" [style.color]="colorTextot3"></ion-icon>
         </ion-item>
+        <br>
         <ion-item>
-          <ion-label>Maestro de Colección</ion-label><ion-icon name="reorder-four-outline"></ion-icon>
+          <ion-label [style.color]="colorTextot4">Maestro</ion-label><ion-icon name="reorder-four-outline" [style.color]="colorTextot4"></ion-icon>
         </ion-item>
         </ion-list>
       </ion-col>
 
 
-      <ion-col size="6">
+      <ion-col size="6" >
         <ion-title>Logros</ion-title>
         <ion-list>
         <ion-item>
-          <ion-label>OK !</ion-label><ion-icon name="checkmark-done-outline"></ion-icon>
+          <ion-label [style.color]="colorTextol1">OK !</ion-label><ion-icon name="checkmark-done-outline" [style.color]="colorTextol1"></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-label>Medio Enkokorado</ion-label><ion-icon name="heart-half-outline"></ion-icon>
+          <ion-label [style.color]="colorTextol2">Medio Enkokorado</ion-label><ion-icon name="heart-half-outline" [style.color]="colorTextol2"></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-label>Cultivando Colecciones</ion-label><ion-icon name="nutrition-outline"></ion-icon>
+          <ion-label [style.color]="colorTextol3">Cultivando Colecciones</ion-label><ion-icon name="nutrition-outline" [style.color]="colorTextol3"></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-label>Brillamos!</ion-label><ion-icon name="sparkles-outline"></ion-icon>
+          <ion-label [style.color]="colorTextol4">Brillamos!</ion-label><ion-icon name="sparkles-outline" [style.color]="colorTextol4"></ion-icon>
         </ion-item>
         <ion-item>
-          <ion-label>Diamante Pulido</ion-label><ion-icon name="diamond-outline"></ion-icon>
+          <ion-label [style.color]="colorTextol5">Diamante Pulido</ion-label><ion-icon name="diamond-outline" [style.color]="colorTextol5"></ion-icon>
         </ion-item>
         </ion-list>
       </ion-col>
@@ -62,17 +74,25 @@
   </ion-grid>
 
   <!-- Tercera franja -->
-  <ion-grid class="colecciones" [fixed]="true">
+  <ion-grid [style.background-color]="colorFondo3">
     <ion-title>Colecciones</ion-title>
     <ion-row>
-      <ion-col>1</ion-col>
-      <ion-col>2</ion-col>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Cantidad de ítems</th>
+                    </tr>
+                </thead>
+                <br>
+                <tbody>
+                    <tr *ngFor="let categoria of coleccionArray">
+                        <td>{{ categoria.categoria }}</td>
+                        <td>{{ categoria.cantidad }}</td>
+                    </tr>
+                </tbody>
+            </table>
     </ion-row>
-  </ion-grid>
-  <ion-grid class="colecciones" [fixed]="true">
-    <ion-row>
-      <ion-col>1</ion-col>
-      <ion-col>2</ion-col>
-    </ion-row>
-  </ion-grid>
+</ion-grid>
+
 </ion-content>
