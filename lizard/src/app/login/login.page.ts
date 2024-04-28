@@ -38,6 +38,7 @@ export class LoginPage implements OnInit {
         }
 
         if (accessToken !== '' ){
+          
           this.router.navigate(['./home'], navigationExtras);
         }
         else{
