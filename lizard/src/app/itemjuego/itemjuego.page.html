@@ -1,15 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>VideoJuego</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <img src="../../assets/img/JUEGOS04.png" style="width: 50%;"/>
+        </ion-col>  
+        <ion-col size="9">
+          <ion-title>Videojuego</ion-title> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">VideoJuego</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <img [src]="videojuego.url_foto" />
+  </ion-item>
 
   <ion-item>
     <ion-label  class="labels"><ion-icon name="book-outline"></ion-icon> Nombre del videojuego</ion-label>
@@ -85,8 +92,8 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+    <ion-button [routerLink]="['/login']"><ion-icon name="exit-outline"></ion-icon></ion-button>
+    <ion-button (click)="home()"><ion-icon name="home-outline"></ion-icon></ion-button>
+    <ion-button (click)="crearTarjeta()"><ion-icon name="id-card-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-footer>

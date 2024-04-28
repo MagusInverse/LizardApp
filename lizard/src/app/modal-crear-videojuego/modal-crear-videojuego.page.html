@@ -48,13 +48,6 @@
 
   <br>
 
-  <!-- inputs de datos especificos para un videojuego -->
-
-  <!-- plataforma: string; -->
-  <!-- genero: string; -->
-  <!-- creador: string; -->
-  <!-- caracteristicas: string; -->
-
   <ion-item>
     <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Plataforma </ion-label>
     <ion-input [(ngModel)]="videojuego.plataforma" type="text" placeholder="Descripción del libro"></ion-input>
@@ -83,6 +76,6 @@
 
   <br>
 
-  <ion-button expand="full">Agregar videojuego</ion-button>
+  <ion-button expand="full" (click)="agregarItem()">Agregar videojuego</ion-button>
 
 </ion-content>

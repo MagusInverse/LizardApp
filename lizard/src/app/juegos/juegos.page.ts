@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {IVideojuego} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-juegos',
@@ -13,10 +13,10 @@ export class JuegosPage implements OnInit {
 
   juegosUsuario: IVideojuego[] = []; // array con los juegos que el usuario ha añadido a su colección
   accessToken='';
-  category = 'cartas';
+  category = 'videojuegos';
   iditem = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -24,10 +24,30 @@ export class JuegosPage implements OnInit {
     })
    }
 
-  ngOnInit() {
+   async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
-  item(){
+  ngOnInit() {
+    this.servicio.obtenerColeccionUsuario(this.accessToken).subscribe((data: any) => {
+      if (data && data.videojuegos) {
+        this.juegosUsuario = data.videojuegos.map((videojuegos: any) => ({
+          nombre: videojuegos.nombre,
+          url_foto: videojuegos.url_foto,
+          _id: videojuegos._id
+        }));
+      }
+    });
+  }
+
+  item(id: string){
+    this.iditem = id;
     let navigationExtras: NavigationExtras = {
       state: {
         accessTokenEnviado: this.accessToken,
@@ -46,6 +66,24 @@ export class JuegosPage implements OnInit {
       }
     }
     this.router.navigate(['./modal-crear-videojuego'], navigationExtras);
+  }
+
+  home(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/home'], navigationExtras);
+  }
+
+  crearTarjeta(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        accessTokenEnviado: this.accessToken
+      }
+    }
+    this.router.navigate(['/tarjeta'], navigationExtras);
   }
 
 }
