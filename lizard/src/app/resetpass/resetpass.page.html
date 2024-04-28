@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label>
-      <h1>Resetear Password</h1>
+      <h1 class="fuentes-cards">Resetear Password</h1>
     </ion-label>
   </ion-item>
 
@@ -21,7 +21,7 @@
 
   <br>
   
-  <ion-button expand="full" (click)="abrirModal()">Validar</ion-button>
-  <ion-button expand="full" [routerLink]="['/login']">Cancelar</ion-button>
+  <ion-button expand="full" (click)="abrirModal()" class="boton-agregar" shape="round">Validar</ion-button>
+  <ion-button expand="full" [routerLink]="['/login']" class="boton-agregar" shape="round">Cancelar</ion-button>
 
 </ion-content>

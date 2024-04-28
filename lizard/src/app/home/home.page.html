@@ -1,18 +1,28 @@
-<ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-label>
-      <ion-img class="logo-container" src="assets/img/loginicon.png" alt="Logo de la aplicación"></ion-img><h1>Home</h1>
-    </ion-label>
-  </ion-item>
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+            <ion-img class="logo-container" src="assets/img/loginicon.png" alt="Logo de la aplicación"></ion-img>
+        </ion-col>
+      
+        <ion-col col-6>
+          <h1 class="fuentes-cards centrado">Home</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col size="3">
+          <ion-col size="4">
             <img [src]="urlFoto" alt="Imagen de perfil" style="width: 90%;">
           </ion-col>  
-          <ion-col size="9">
+          <ion-col size="8">
             <ion-label>{{ username }}</ion-label>
             <br>
             <ion-label>{{ email }}</ion-label>
@@ -22,21 +32,29 @@
     </ion-card-content>
   </ion-card>
   <br>
+  <ion-button expand="full" (click)="categoria()" class="labels boton-agregar" shape="round">Categoria</ion-button>
   <br>
-  <ion-button expand="full" (click)="categoria()" class="labels" color="dark">Categoria</ion-button>
+  <ion-button expand="full" (click)="top10()" class="labels boton-agregar" shape="round">Top 10</ion-button>
   <br>
-  <ion-button expand="full" (click)="top10()" class="labels" color="dark">Top 10</ion-button>
+  <ion-button expand="full" (click)="logrosytitulos()" class="labels boton-agregar" shape="round">Logros y titulos</ion-button>
   <br>
-  <ion-button expand="full" (click)="logrosytitulos()" class="labels" color="dark">Logros y titulos</ion-button>
+  <ion-button expand="full" (click)="generartarjeta()" class="labels boton-agregar" shape="round">Generar Tarjeta</ion-button>
   <br>
-  <ion-button expand="full" (click)="generartarjeta()" class="labels" color="dark">Generar Tarjeta</ion-button>
-  <br>
-  <ion-button expand="full" [routerLink]="['/acercade']" class="labels" color="dark">Acerca de ...</ion-button>
+  <ion-button expand="full" [routerLink]="['/acercade']" class="labels boton-agregar" shape="round">Acerca de ...</ion-button>
 </ion-content>
+
 <ion-footer>
-  <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+  </div>
   </ion-toolbar>
 </ion-footer>

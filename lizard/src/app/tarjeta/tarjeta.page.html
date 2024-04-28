@@ -13,7 +13,8 @@
 
   <br>
   <ion-item>
-    <ion-label>Recuerda que al generar tu tarjeta, tomale captura para guardar tu tarjeta y compartirla!</ion-label>
+    <ion-label><ion-icon name="eye-outline"></ion-icon><h2 class="fuentes-cards">OwO</h2>
+    <br>Recuerda que al generar tu tarjeta, tomale captura para guardar tu tarjeta y compartirla!</ion-label>
   </ion-item>
   <!-- seleccionar el color -->
   <ion-item>
@@ -38,12 +39,21 @@
     </ion-select>
   </ion-item>
 <br>
-  <ion-button expand="full" (click)="generarTarjeta()" class="labels fuentes-cards" shape="round">Generar tarjeta</ion-button>
+  <ion-button expand="full" (click)="generarTarjeta()" class="labels fuentes-cards boton-agregar" shape="round">Generar tarjeta</ion-button>
 </ion-content>
+ 
 <ion-footer>
-  <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+  </div>
   </ion-toolbar>
 </ion-footer>
