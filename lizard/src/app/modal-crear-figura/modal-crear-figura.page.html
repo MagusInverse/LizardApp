@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="fuentes-cards">
       Agregar nueva figura
     </ion-title>
     <ion-buttons slot="end">
@@ -16,63 +16,49 @@
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels">Nombre de la figura</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Nombre</ion-label>
     <ion-input [(ngModel)]="figura.nombre" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Foto de la figura</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Foto</ion-label>
     <ion-input [(ngModel)]="figura.url_foto" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Tipo de figura</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Tipo</ion-label>
     <ion-input [(ngModel)]="figura.tipo" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Descripción </ion-label>
     <ion-input [(ngModel)]="figura.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels">Fecha adquisición</ion-label>
+    <ion-label class="labels tamanoletra">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="figura.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
-
-  <br>
 
   <!-- inputs de datos especificos para una figura -->
 
   <ion-item>
-    <ion-label position="floating" class="labels">Origen </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Origen </ion-label>
     <ion-input [(ngModel)]="figura.origen" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Tamaño de la figura </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Tamaño de la figura </ion-label>
     <ion-input [(ngModel)]="figura.tamano" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Material </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Material </ion-label>
     <ion-input [(ngModel)]="figura.material" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Empresa </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Empresa </ion-label>
     <ion-input [(ngModel)]="figura.empresa" type="text"></ion-input>
   </ion-item>
 

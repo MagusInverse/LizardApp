@@ -4,29 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<br>
-
 <ion-content>
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Último Título</th>
-        <th>Cantidad de Logros</th>
-        <th>Cantidad de Títulos</th>
-        <th>Cantidad de Ítems Totales</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of listaUsuariosTop10">
-        <td>{{ usuario.username }}</td>
-        <td>{{ usuario.ultimo_titulo }}</td>
-        <td>{{ usuario.cantidad_logros }}</td>
-        <td>{{ usuario.cantidad_titulos }}</td>
-        <td>{{ usuario.cantidad_items }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <ion-img class="logo-container" src="../../assets/img/bannerreddit.png"></ion-img>  
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Último Título</th>
+          <th>Cantidad de Logros</th>
+          <th>Cantidad de Títulos</th>
+          <th>Cantidad de Ítems Totales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listaUsuariosTop10">
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.ultimo_titulo }}</td>
+          <td>{{ usuario.cantidad_logros }}</td>
+          <td>{{ usuario.cantidad_titulos }}</td>
+          <td>{{ usuario.cantidad_items }}</td>
+        </tr>
+      </tbody>
+    </table>
 </ion-content>
 <ion-footer>
   <ion-toolbar mode="ios" class="botones-footer">

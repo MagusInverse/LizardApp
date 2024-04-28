@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="fuentes-cards">
       Agregar nueva arma
     </ion-title>
     <ion-buttons slot="end">
@@ -11,42 +11,32 @@
   </ion-toolbar>
 </ion-header>
 
-<br>
-
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels">Nombre de la arma</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Nombre</ion-label>
     <ion-input [(ngModel)]="arma.nombre" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Foto de la arma</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Foto</ion-label>
     <ion-input [(ngModel)]="arma.url_foto" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Tipo de arma</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Tipo</ion-label>
     <ion-input [(ngModel)]="arma.tipo" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Descripción</ion-label>
     <ion-input [(ngModel)]="arma.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels">Fecha adquisición</ion-label>
+    <ion-label class="labels tamanoletra">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="arma.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
-
-  <br>
 
   <!-- inputs de datos especificos para un arma -->
 
@@ -56,31 +46,24 @@
   <!-- fabricante: string; -->
 
   <ion-item>
-    <ion-label position="floating" class="labels">Material </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Material </ion-label>
     <ion-input [(ngModel)]="arma.material" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Tamaño </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Tamaño </ion-label>
     <ion-input [(ngModel)]="arma.tamano" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Peso </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Peso </ion-label>
     <ion-input [(ngModel)]="arma.peso" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Fabricante </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Fabricante </ion-label>
     <ion-input [(ngModel)]="arma.fabricante" type="text"></ion-input>
   </ion-item>
-
   <br>
 
   <ion-button expand="full" (click)="agregarItem()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Arma</ion-button>

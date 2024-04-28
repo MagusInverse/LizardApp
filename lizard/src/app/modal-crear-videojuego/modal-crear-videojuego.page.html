@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="fuentes-cards tamanoletra">
       Agregar nuevo videojuego
     </ion-title>
     <ion-buttons slot="end">
@@ -16,61 +16,47 @@
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels">Nombre del videojuego</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Nombre</ion-label>
     <ion-input [(ngModel)]="videojuego.nombre" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Foto del videojuego</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Foto</ion-label>
     <ion-input [(ngModel)]="videojuego.url_foto" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Tipo de videojuego</ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Tipo</ion-label>
     <ion-input [(ngModel)]="videojuego.tipo" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Descripción </ion-label>
     <ion-input [(ngModel)]="videojuego.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels">Fecha adquisición</ion-label>
+    <ion-label class="labels tamanoletra">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="videojuego.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Plataforma </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Plataforma </ion-label>
     <ion-input [(ngModel)]="videojuego.plataforma" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Genero </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Genero </ion-label>
     <ion-input [(ngModel)]="videojuego.genero" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Creador </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Creador </ion-label>
     <ion-input [(ngModel)]="videojuego.creador" type="text"></ion-input>
   </ion-item>
 
-  <br>
-
   <ion-item>
-    <ion-label position="floating" class="labels">Caracteristicas </ion-label>
+    <ion-label position="floating" class="labels tamanoletra">Caracteristicas </ion-label>
     <ion-input [(ngModel)]="videojuego.caracteristicas" type="text"></ion-input>
   </ion-item>
 
