@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Agregar nueva figura a la colección
+      Agregar nueva figura
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
@@ -16,33 +16,33 @@
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre de la figura</ion-label>
-    <ion-input [(ngModel)]="figura.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+    <ion-label position="floating" class="labels">Nombre de la figura</ion-label>
+    <ion-input [(ngModel)]="figura.nombre" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto de la figura</ion-label>
-    <ion-input [(ngModel)]="figura.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+    <ion-label position="floating" class="labels">Foto de la figura</ion-label>
+    <ion-input [(ngModel)]="figura.url_foto" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de figura</ion-label>
-    <ion-input [(ngModel)]="figura.tipo" type="text" placeholder="ejemplo: "></ion-input>
+    <ion-label position="floating" class="labels">Tipo de figura</ion-label>
+    <ion-input [(ngModel)]="figura.tipo" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
-    <ion-input [(ngModel)]="figura.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-input [(ngModel)]="figura.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-label class="labels">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="figura.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
 
@@ -51,33 +51,33 @@
   <!-- inputs de datos especificos para una figura -->
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Origen </ion-label>
-    <ion-input [(ngModel)]="figura.origen" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Origen </ion-label>
+    <ion-input [(ngModel)]="figura.origen" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tamaño de la figura </ion-label>
-    <ion-input [(ngModel)]="figura.tamano" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Tamaño de la figura </ion-label>
+    <ion-input [(ngModel)]="figura.tamano" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Material </ion-label>
-    <ion-input [(ngModel)]="figura.material" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Material </ion-label>
+    <ion-input [(ngModel)]="figura.material" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Empresa </ion-label>
-    <ion-input [(ngModel)]="figura.empresa" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Empresa </ion-label>
+    <ion-input [(ngModel)]="figura.empresa" type="text"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-button expand="full" (click)="agregarItem()">Agregar figura</ion-button>
+  <ion-button expand="full" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Figura</ion-button>
 
 </ion-content>

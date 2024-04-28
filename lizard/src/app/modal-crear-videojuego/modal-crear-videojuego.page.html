@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Agregar nuevo videojuego a la colección
+      Agregar nuevo videojuego
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
@@ -16,66 +16,67 @@
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre del videojuego</ion-label>
-    <ion-input [(ngModel)]="videojuego.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+    <ion-label position="floating" class="labels">Nombre del videojuego</ion-label>
+    <ion-input [(ngModel)]="videojuego.nombre" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto del videojuego</ion-label>
-    <ion-input [(ngModel)]="videojuego.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+    <ion-label position="floating" class="labels">Foto del videojuego</ion-label>
+    <ion-input [(ngModel)]="videojuego.url_foto" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de videojuego</ion-label>
-    <ion-input [(ngModel)]="videojuego.tipo" type="text" placeholder="ejemplo: "></ion-input>
+    <ion-label position="floating" class="labels">Tipo de videojuego</ion-label>
+    <ion-input [(ngModel)]="videojuego.tipo" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
-    <ion-input [(ngModel)]="videojuego.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-input [(ngModel)]="videojuego.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-label class="labels">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="videojuego.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Plataforma </ion-label>
-    <ion-input [(ngModel)]="videojuego.plataforma" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Plataforma </ion-label>
+    <ion-input [(ngModel)]="videojuego.plataforma" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Genero </ion-label>
-    <ion-input [(ngModel)]="videojuego.genero" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Genero </ion-label>
+    <ion-input [(ngModel)]="videojuego.genero" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Creador </ion-label>
-    <ion-input [(ngModel)]="videojuego.creador" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Creador </ion-label>
+    <ion-input [(ngModel)]="videojuego.creador" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Caracteristicas </ion-label>
-    <ion-input [(ngModel)]="videojuego.caracteristicas" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Caracteristicas </ion-label>
+    <ion-input [(ngModel)]="videojuego.caracteristicas" type="text"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-button expand="full" (click)="agregarItem()">Agregar videojuego</ion-button>
+
+  <ion-button expand="full" (click)="agregarItem()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Videojuego</ion-button>
 
 </ion-content>

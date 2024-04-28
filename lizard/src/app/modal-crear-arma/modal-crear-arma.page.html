@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Agregar nueva arma a la colección
+      Agregar nueva arma
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
@@ -16,33 +16,33 @@
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre de la arma</ion-label>
-    <ion-input [(ngModel)]="arma.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+    <ion-label position="floating" class="labels">Nombre de la arma</ion-label>
+    <ion-input [(ngModel)]="arma.nombre" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto de la arma</ion-label>
-    <ion-input [(ngModel)]="arma.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+    <ion-label position="floating" class="labels">Foto de la arma</ion-label>
+    <ion-input [(ngModel)]="arma.url_foto" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de arma</ion-label>
-    <ion-input [(ngModel)]="arma.tipo" type="text" placeholder="ejemplo: "></ion-input>
+    <ion-label position="floating" class="labels">Tipo de arma</ion-label>
+    <ion-input [(ngModel)]="arma.tipo" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
-    <ion-input [(ngModel)]="arma.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-input [(ngModel)]="arma.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-label class="labels">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="arma.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
 
@@ -56,33 +56,33 @@
   <!-- fabricante: string; -->
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Material </ion-label>
-    <ion-input [(ngModel)]="arma.material" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Material </ion-label>
+    <ion-input [(ngModel)]="arma.material" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tamaño </ion-label>
-    <ion-input [(ngModel)]="arma.tamano" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Tamaño </ion-label>
+    <ion-input [(ngModel)]="arma.tamano" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Peso </ion-label>
-    <ion-input [(ngModel)]="arma.peso" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Peso </ion-label>
+    <ion-input [(ngModel)]="arma.peso" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Fabricante </ion-label>
-    <ion-input [(ngModel)]="arma.fabricante" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Fabricante </ion-label>
+    <ion-input [(ngModel)]="arma.fabricante" type="text"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-button expand="full" (click)="agregarItem()">Agregar arma</ion-button>
+  <ion-button expand="full" (click)="agregarItem()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Arma</ion-button>
 
 </ion-content>

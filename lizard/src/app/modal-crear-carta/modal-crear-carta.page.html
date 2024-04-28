@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Agregar nueva carta a la colección
+      Agregar nueva carta
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
@@ -16,33 +16,33 @@
 <ion-content>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Nombre de la carta</ion-label>
-    <ion-input [(ngModel)]="carta.nombre" type="text" placeholder="Nombre del libro"></ion-input>
+    <ion-label position="floating" class="labels">Nombre de la carta</ion-label>
+    <ion-input [(ngModel)]="carta.nombre" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="link-outline"></ion-icon> Foto de la carta</ion-label>
-    <ion-input [(ngModel)]="carta.url_foto" type="text" placeholder="www.google.com/image.png"></ion-input>
+    <ion-label position="floating" class="labels">Foto de la carta</ion-label>
+    <ion-input [(ngModel)]="carta.url_foto" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Tipo de carta</ion-label>
-    <ion-input [(ngModel)]="carta.tipo" type="text" placeholder="ejemplo: "></ion-input>
+    <ion-label position="floating" class="labels">Tipo de carta</ion-label>
+    <ion-input [(ngModel)]="carta.tipo" type="text"></ion-input>
   </ion-item>
 
   <br>
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Descripción </ion-label>
-    <ion-input [(ngModel)]="carta.descripcion" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Descripción </ion-label>
+    <ion-input [(ngModel)]="carta.descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label class="labels"><ion-icon name="calendar-outline"></ion-icon>  Fecha adquisición</ion-label>
+    <ion-label class="labels">Fecha adquisición</ion-label>
     <ion-input [(ngModel)]="carta.fecha_adquisicion" type="date"></ion-input>
   </ion-item>
 
@@ -51,12 +51,12 @@
   <!-- inputs de datos especificos para una carta -->
 
   <ion-item>
-    <ion-label position="floating" class="labels"><ion-icon name="book-outline"></ion-icon> Juego </ion-label>
-    <ion-input [(ngModel)]="carta.juego" type="text" placeholder="Descripción del libro"></ion-input>
+    <ion-label position="floating" class="labels">Juego </ion-label>
+    <ion-input [(ngModel)]="carta.juego" type="text"></ion-input>
   </ion-item>
 
   <br>
 
-  <ion-button expand="full">Agregar carta</ion-button>
+  <ion-button expand="full" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Carta</ion-button>
 
 </ion-content>
