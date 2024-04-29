@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
+import { NavController } from '@ionic/angular';
 
 interface Titulo {
   nombre: string;
@@ -42,7 +43,7 @@ export class TitulosylogrosPage implements OnInit {
   colorTextol4: string = '';
   colorTextol5: string = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private navController: NavController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -95,6 +96,10 @@ export class TitulosylogrosPage implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  volverAtras() {
+    this.navController.pop();
   }
 
 }

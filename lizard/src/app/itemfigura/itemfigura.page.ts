@@ -3,6 +3,7 @@ import {IFigura} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-itemfigura',
@@ -30,7 +31,7 @@ export class ItemfiguraPage implements OnInit {
   category = '';
   iditem = '';
 
- constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
+ constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController, private navController: NavController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -128,6 +129,10 @@ export class ItemfiguraPage implements OnInit {
       }
     }
     this.router.navigate(['/tarjeta'], navigationExtras);
+  }
+
+  volverAtras() {
+    this.navController.pop();
   }
 
 

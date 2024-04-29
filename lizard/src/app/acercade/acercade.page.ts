@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-acercade',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcercadePage implements OnInit {
 
-  constructor() { }
+  constructor(private navController: NavController) {}
 
+  volverAtras() {
+    this.navController.pop();
+  }
+  
   ngOnInit() {
   }
 

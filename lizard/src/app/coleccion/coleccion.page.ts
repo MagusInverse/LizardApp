@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-coleccion',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColeccionPage implements OnInit {
 
-  constructor() { }
+  constructor(private navController: NavController) {}
 
   ngOnInit() {
+  }
+
+  volverAtras() {
+    this.navController.pop();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { MainServiceService } from '../services/main-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginPage implements OnInit {
   usuario: string = '';
   clave: string = '';
 
-  constructor(private router: Router, private alertController: AlertController, private servicio: MainServiceService) { }
+  constructor(private router: Router, private alertController: AlertController, private servicio: MainServiceService, private navController: NavController) { }
 
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
@@ -49,5 +50,9 @@ export class LoginPage implements OnInit {
         this.presentAlert('Usuario/Password Incorrecta');
       }
     );
+  }
+
+  volverAtras() {
+    this.navController.pop();
   }
 }

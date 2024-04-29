@@ -3,6 +3,7 @@ import {IVideojuego} from '../coleccionInterfaces';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-itemjuego',
@@ -30,7 +31,7 @@ export class ItemjuegoPage implements OnInit {
   category = '';
   iditem = '';
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private servicio: MainServiceService, private alertController: AlertController, private navController: NavController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -128,6 +129,10 @@ export class ItemjuegoPage implements OnInit {
         console.log(error);
       } 
     );
+  }
+
+  volverAtras() {
+    this.navController.pop();
   }
 
 }

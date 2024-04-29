@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainServiceService } from '../services/main-service.service';
+import { NavController } from '@ionic/angular';
+
 
 interface UsuarioTop10 {
   username: string;
@@ -17,7 +19,7 @@ interface UsuarioTop10 {
 export class Top10Page implements OnInit {
   listaUsuariosTop10: UsuarioTop10[] = [];
 
-  constructor(private mainService: MainServiceService) {}
+  constructor(private mainService: MainServiceService, private navController: NavController) {}
 
   ngOnInit() {
     this.obtenerTop10Usuarios();
@@ -32,5 +34,9 @@ export class Top10Page implements OnInit {
         console.error('Error al obtener top 10 usuarios:', error);
       }
     );
+  }
+
+  volverAtras() {
+    this.navController.pop();
   }
 }

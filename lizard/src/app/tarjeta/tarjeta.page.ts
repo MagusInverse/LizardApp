@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { MainServiceService } from '../services/main-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tarjeta',
@@ -28,7 +29,7 @@ export class TarjetaPage implements OnInit {
   accessToken='';
 
 
-  constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController) {
+  constructor(private activedRouter: ActivatedRoute, private router: Router, private modalController: ModalController, private navController: NavController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -53,6 +54,8 @@ export class TarjetaPage implements OnInit {
     this.router.navigate(['./modal-tarjeta'], navigationExtras);
   }
 
-
+  volverAtras() {
+    this.navController.pop();
+  }
 
 }

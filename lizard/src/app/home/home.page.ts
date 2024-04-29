@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { MainServiceService } from '../services/main-service.service';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HomePage implements OnInit {
   coleccion: string[] = [];
   tituloActual: string = '';
 
-  constructor(private activedRouter: ActivatedRoute, private alertController: AlertController, private router: Router, private servicio: MainServiceService) {
+  constructor(private activedRouter: ActivatedRoute, private alertController: AlertController, private router: Router, private servicio: MainServiceService, private navController: NavController) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.accessToken = this.router.getCurrentNavigation()?.extras?.state?.['accessTokenEnviado'];
@@ -93,5 +94,10 @@ export class HomePage implements OnInit {
 
     this.router.navigate(['./tarjeta'], navigationExtras);
   }
+
+  volverAtras() {
+    this.navController.pop();
+  }
+  
 
 }
