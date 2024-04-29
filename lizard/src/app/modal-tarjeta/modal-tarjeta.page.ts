@@ -109,7 +109,7 @@ export class ModalTarjetaPage implements OnInit {
   }
 
   cerrarModal() {
-    this.modalController.dismiss();
+    this.router.navigate(['./home']);
   }
 
 }

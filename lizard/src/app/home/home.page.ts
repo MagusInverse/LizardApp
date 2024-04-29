@@ -50,7 +50,7 @@ export class HomePage implements OnInit {
         this.coleccion = Object.keys(data.coleccion);
       },
       (error) => {
-        this.presentAlert(error);
+        console.log(error);
       }
     );
   }
