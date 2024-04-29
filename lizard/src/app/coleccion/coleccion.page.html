@@ -1,14 +1,14 @@
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label>
-      <h1>Colecciones</h1>
+      <h1 class="fuentes-cards tamanoletra">Colecciones</h1>
     </ion-label>
   </ion-item>
 
   <ion-card>
   <ion-card-header>
     <!-- Título del card -->
-    <ion-card-title>Usuario</ion-card-title>
+    <ion-card-title class="fuentes-cards tamanoletra">Usuario</ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
@@ -51,20 +51,32 @@
   </ion-card>
   <br>
   <br>
-  <ion-button expand="full">Categoria</ion-button>
+  <ion-button class="boton-agregar" shape="round" expand="full">Categoria</ion-button>
   <br>
-  <ion-button expand="full">Top 10</ion-button>
+  <ion-button class="boton-agregar" shape="round" expand="full">Top 10</ion-button>
   <br>
-  <ion-button expand="full">Logros y titulos</ion-button>
+  <ion-button class="boton-agregar" shape="round" expand="full">Logros y titulos</ion-button>
   <br>
-  <ion-button expand="full">Generar Tarjeta</ion-button>
+  <ion-button class="boton-agregar" shape="round" expand="full">Generar Tarjeta</ion-button>
   <br>
-  <ion-button expand="full">Acerca de ...</ion-button>
+  <ion-button class="boton-agregar" shape="round" expand="full">Acerca de ...</ion-button>
 </ion-content>
+
 <ion-footer>
-  <ion-toolbar>
-    <ion-button [routerLink]="['/login']">Salir</ion-button>
-    <ion-button>B</ion-button>
-    <ion-button>C</ion-button>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
   </ion-toolbar>
 </ion-footer>
