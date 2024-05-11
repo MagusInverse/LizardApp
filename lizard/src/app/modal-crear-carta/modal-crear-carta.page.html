@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="fuentes-cards">
+      Agregar nueva carta
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Nombre</ion-label>
+    <ion-input [(ngModel)]="carta.nombre" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Foto</ion-label>
+    <ion-input [(ngModel)]="carta.url_foto" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Tipo</ion-label>
+    <ion-input [(ngModel)]="carta.tipo" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Descripción </ion-label>
+    <ion-input [(ngModel)]="carta.descripcion" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels tamanoletra">Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="carta.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <!-- inputs de datos especificos para una carta -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Juego </ion-label>
+    <ion-input [(ngModel)]="carta.juego" type="text"></ion-input>
+  </ion-item>
+  <br>
+
+  <ion-button (click)="agregarItem()" expand="full" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Carta</ion-button>
+
+</ion-content>

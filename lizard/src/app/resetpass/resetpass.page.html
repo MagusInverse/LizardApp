@@ -1,13 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>resetpass</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">resetpass</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label>
+      <h1 class="fuentes-cards">Resetear Password</h1>
+    </ion-label>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="person-outline" ></ion-icon>  Usuario</ion-label>
+    <ion-input placeholder="Ingresar Usuario" [(ngModel)]="user"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <ion-item>
+    <ion-label position="floating" class="labels"><ion-icon name="mail-outline"></ion-icon>  Correo Electrónico</ion-label>
+    <ion-input placeholder="Ingresar Correo Electrónico" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <br>
+  
+  <ion-button expand="full" (click)="abrirModal()" class="boton-agregar" shape="round">Validar</ion-button>
+  <ion-button expand="full" [routerLink]="['/login']" class="boton-agregar" shape="round">Cancelar</ion-button>
+
 </ion-content>

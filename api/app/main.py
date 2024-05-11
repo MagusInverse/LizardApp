@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import autenticacion, crud_categorias, crud_items
+from .routers import autenticacion, crud_categorias, crud_items, otros, gamificacion
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -18,6 +18,8 @@ app.add_middleware(
 app.include_router(autenticacion.router) # endpoints para autenticacion y registro de usuarios
 app.include_router(crud_items.router) # endpoints para CRUD de items
 app.include_router(crud_categorias.router) # endpoints para CRUD de categorias
+app.include_router(gamificacion.router) # endpoints para gamificación
+app.include_router(otros.router) # endpoints sin clasificar
 
 @app.get("/")
 def estado_api():

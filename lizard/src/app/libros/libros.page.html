@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="fuentes-cards" ><ion-icon name="bookmark-outline"></ion-icon> Libros</ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+<ion-content [fullscreen]="true">
+  <ion-button expand="full" [routerLink]="['/modal-crear-libro']" (click)="abrirModal()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar (+)</ion-button>
+  <br>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let libro of librosUsuario">
+        <ion-card (click)="item(libro._id)">
+          <img [src]="libro.url_foto" />
+          <ion-card-header>
+            <ion-card-title class="labels fuentes-cards">{{ libro.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{ libro._id }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

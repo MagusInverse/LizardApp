@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="fuentes-cards tamanoletra">
+      Agregar nuevo videojuego
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Nombre</ion-label>
+    <ion-input [(ngModel)]="videojuego.nombre" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Foto</ion-label>
+    <ion-input [(ngModel)]="videojuego.url_foto" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Tipo</ion-label>
+    <ion-input [(ngModel)]="videojuego.tipo" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Descripción </ion-label>
+    <ion-input [(ngModel)]="videojuego.descripcion" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels tamanoletra">Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="videojuego.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Plataforma </ion-label>
+    <ion-input [(ngModel)]="videojuego.plataforma" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Genero </ion-label>
+    <ion-input [(ngModel)]="videojuego.genero" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Creador </ion-label>
+    <ion-input [(ngModel)]="videojuego.creador" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Caracteristicas </ion-label>
+    <ion-input [(ngModel)]="videojuego.caracteristicas" type="text"></ion-input>
+  </ion-item>
+
+  <br>
+
+
+  <ion-button expand="full" (click)="agregarItem()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Videojuego</ion-button>
+
+</ion-content>

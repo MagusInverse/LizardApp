@@ -1,0 +1,24 @@
+   .logo-container {
+        width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }  
+
+    .background {
+        --background: url('../../assets/img/fondologin2.png') center;
+        background-size: contain;
+
+    }
+
+    .botones-footer {
+        --ion-color-primary: crimson;
+    }
+    
+    .boton-agregar {
+        --ion-color-primary: crimson;
+    }
+    
+    ion-button {
+        --color: black
+    }

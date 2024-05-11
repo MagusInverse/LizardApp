@@ -1,13 +1,73 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>titulosylogros</ion-title>
+    <ion-title class="fuentes-cards"><ion-icon name="ribbon-outline"></ion-icon> Títulos y Logros</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">titulosylogros</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid> 
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label [style.color]="colorTextot1">Novato</ion-label><ion-icon name="remove-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextot2">Aficionado</ion-label><ion-icon name="reorder-two-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextot3" >Coleccionista</ion-label><ion-icon name="reorder-three-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextot4">Maestro</ion-label><ion-icon name="reorder-four-outline"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid> 
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label [style.color]="colorTextol1">OK !<br><h6>Consigue tu primera coleccion en una categoría</h6></ion-label><ion-icon name="checkmark-done-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextol2">Medio Enkokorado<br><h6>Consigue 2 items en una categoría</h6></ion-label><ion-icon name="heart-half-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextol3">Cultivando Colecciones<br><h6>Consigue 5 items en una categoría</h6></ion-label><ion-icon name="nutrition-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextol4">Brillamos!<br><h6>Consigue 10 items en una categoría</h6></ion-label><ion-icon name="sparkles-outline"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label [style.color]="colorTextol5">Diamante Pulido<br><h6>Consigue 20 o más items en una categoría</h6></ion-label><ion-icon name="diamond-outline"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>            
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

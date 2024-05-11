@@ -1,13 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>top10</ion-title>
+    <ion-title class="fuentes-cards" ><ion-icon name="podium-outline"></ion-icon> Top 10</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">top10</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-img class="logo-container" src="../../assets/img/bannerreddit.png"></ion-img>  
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Último Título</th>
+          <th>Cantidad de Logros</th>
+          <th>Cantidad de Títulos</th>
+          <th>Cantidad de Ítems Totales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listaUsuariosTop10">
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.ultimo_titulo }}</td>
+          <td>{{ usuario.cantidad_logros }}</td>
+          <td>{{ usuario.cantidad_titulos }}</td>
+          <td>{{ usuario.cantidad_items }}</td>
+        </tr>
+      </tbody>
+    </table>
 </ion-content>
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

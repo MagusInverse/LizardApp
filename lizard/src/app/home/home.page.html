@@ -1,13 +1,60 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+            <ion-img class="logo-container" src="assets/img/loginicon.png" alt="Logo de la aplicación"></ion-img>
+        </ion-col>
+      
+        <ion-col col-6>
+          <h1 class="fuentes-cards centrado">Home</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <img [src]="urlFoto" alt="Imagen de perfil" style="width: 90%;">
+          </ion-col>  
+          <ion-col size="8">
+            <ion-label>{{ username }}</ion-label>
+            <br>
+            <ion-label>{{ email }}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid> 
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <ion-button expand="full" (click)="categoria()" class="labels boton-agregar" shape="round">Categoria</ion-button>
+  <br>
+  <ion-button expand="full" (click)="top10()" class="labels boton-agregar" shape="round">Top 10</ion-button>
+  <br>
+  <ion-button expand="full" (click)="logrosytitulos()" class="labels boton-agregar" shape="round">Logros y titulos</ion-button>
+  <br>
+  <ion-button expand="full" (click)="generartarjeta()" class="labels boton-agregar" shape="round">Generar Tarjeta</ion-button>
+  <br>
+  <ion-button expand="full" [routerLink]="['/acercade']" class="labels boton-agregar" shape="round">Acerca de ...</ion-button>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <img src="../../assets/img/LIBROICONO.png" style="width: 80%;"/>
+        </ion-col>  
+        <ion-col size="8">
+          <br>
+          <ion-title class="fuentes-cards sombrerines">Libro</ion-title> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <img [src]="libro.url_foto" />
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels">Nombre </ion-label>
+    <ion-input readonly [(ngModel)]="libro.nombre" id="nombre" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('nombre')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Url foto </ion-label>
+    <ion-input readonly [(ngModel)]="libro.url_foto" id="url_foto" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('url_foto')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Tipo </ion-label>
+    <ion-input readonly [(ngModel)]="libro.tipo" id="tipo" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('tipo')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels">Fecha adquisición</ion-label>
+    <ion-input readonly [(ngModel)]="libro.fecha_adquisicion" id="fecha_adquisicion" type="text"></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('fecha_adquisicion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels">Autor  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.autor" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels">Editorial </ion-label>
+    <ion-input readonly [(ngModel)]="libro.editorial" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels">Genero  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.genero" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Paginas  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.paginas" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Año  </ion-label>
+    <ion-input readonly [(ngModel)]="libro.anio_publicacion" type="text" ></ion-input>
+  </ion-item>
+
+  <div style="text-align: center;">
+  <ion-button class="boton-agregar" (click)="actualizarItem()" shape="round">Modificar</ion-button>
+  <ion-button class="boton-agregar" (click)="eliminarItem()" shape="round">Eliminar</ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

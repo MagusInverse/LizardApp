@@ -8,4 +8,6 @@ pytest==8.0.0
 python-multipart==0.0.9 # para usar form data en OAuth2
 python-jose[cryptography]==3.3.0
 pymongo[srv]==4.6.1
+pytz==2024.1
+Faker==25.0.0
 

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="fuentes-cards">
+      Agregar nueva arma
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Nombre</ion-label>
+    <ion-input [(ngModel)]="arma.nombre" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Foto</ion-label>
+    <ion-input [(ngModel)]="arma.url_foto" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Tipo</ion-label>
+    <ion-input [(ngModel)]="arma.tipo" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Descripción</ion-label>
+    <ion-input [(ngModel)]="arma.descripcion" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels tamanoletra">Fecha adquisición</ion-label>
+    <ion-input [(ngModel)]="arma.fecha_adquisicion" type="date"></ion-input>
+  </ion-item>
+
+  <!-- inputs de datos especificos para un arma -->
+
+  <!-- material: string; -->
+  <!-- tamano: number; -->
+  <!-- peso: number; -->
+  <!-- fabricante: string; -->
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Material </ion-label>
+    <ion-input [(ngModel)]="arma.material" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Tamaño </ion-label>
+    <ion-input [(ngModel)]="arma.tamano" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Peso </ion-label>
+    <ion-input [(ngModel)]="arma.peso" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" class="labels tamanoletra">Fabricante </ion-label>
+    <ion-input [(ngModel)]="arma.fabricante" type="text"></ion-input>
+  </ion-item>
+  <br>
+
+  <ion-button expand="full" (click)="agregarItem()" class="labels fuentes-cards boton-agregar" shape="round" >Agregar Arma</ion-button>
+
+</ion-content>

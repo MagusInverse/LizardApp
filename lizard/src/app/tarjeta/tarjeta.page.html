@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>tarjeta</ion-title>
+    <ion-title>Tarjeta</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +10,53 @@
       <ion-title size="large">tarjeta</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <br>
+  <ion-item>
+    <ion-label><ion-icon name="eye-outline"></ion-icon><h2 class="fuentes-cards">OwO</h2>
+    <br>Recuerda que al generar tu tarjeta, tomale captura para guardar tu tarjeta y compartirla!</ion-label>
+  </ion-item>
+  <!-- seleccionar el color -->
+  <ion-item>
+    <ion-label>Color 1</ion-label>
+    <input type="color" [(ngModel)]="colorTarjeta1">
+  </ion-item>
+  <ion-item>
+    <ion-label>Color 2</ion-label>
+    <input type="color" [(ngModel)]="colorTarjeta2">
+  </ion-item>
+  <ion-item>
+    <ion-label>Color 3</ion-label>
+    <input type="color" [(ngModel)]="colorTarjeta3">
+  </ion-item>
+  <!-- seleccionar la fuente de letra -->
+  <ion-item>
+    <ion-select [(ngModel)]="fuenteTarjeta" label="Fuente de letra:" label-placement="floating">
+      <!-- poner aquí las opciones de fuentes -->
+      <ion-select-option value="Arial">Arial</ion-select-option>
+      <ion-select-option value="Courier New">Courier New</ion-select-option>
+      <ion-select-option value="Georgia">Georgia</ion-select-option>
+    </ion-select>
+  </ion-item>
+<br>
+  <ion-button expand="full" (click)="generarTarjeta()" class="labels fuentes-cards boton-agregar" shape="round">Generar tarjeta</ion-button>
 </ion-content>
+ 
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <img src="../../assets/img/FIGURA01.png" style="width: 50%;"/>
+        </ion-col>  
+        <ion-col size="8">
+          <br>
+          <ion-title class="fuentes-cards sombrerines">Figura</ion-title> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Figura</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <img [src]="figura.url_foto" />
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Nombre de la figura</ion-label>
+    <ion-input readonly [(ngModel)]="figura.nombre" id="nombre" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('nombre')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Foto de la figura</ion-label>
+    <ion-input readonly [(ngModel)]="figura.url_foto" id="url_foto" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('url_foto')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Tipo de figura</ion-label>
+    <ion-input readonly [(ngModel)]="figura.tipo" id="tipo" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('tipo')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Descripción </ion-label>
+    <ion-input readonly [(ngModel)]="figura.descripcion" id="descripcion" type="text" ></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('descripcion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="labels">Fecha adquisición</ion-label>
+    <ion-input readonly [(ngModel)]="figura.fecha_adquisicion" id="fecha_adquisicion" type="text" pattern="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$"></ion-input>
+    <ion-button class="boton-agregar" (click)="cambiarEstadoEditable('fecha_adquisicion')"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+  </ion-item>
+
+  <!-- inputs de datos especificos para una figura -->
+
+  <ion-item>
+    <ion-label  class="labels">Origen </ion-label>
+    <ion-input readonly [(ngModel)]="figura.origen" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Tamaño de la figura </ion-label>
+    <ion-input readonly [(ngModel)]="figura.tamano" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Material </ion-label>
+    <ion-input readonly [(ngModel)]="figura.material" type="text" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label  class="labels">Empresa </ion-label>
+    <ion-input readonly [(ngModel)]="figura.empresa" type="text" ></ion-input>
+  </ion-item>
+
+  <div style="text-align: center;">
+  <ion-button class="boton-agregar" (click)="actualizarItem()" shape="round">Modificar</ion-button>
+  <ion-button class="boton-agregar" (click)="eliminarItem()" shape="round">Eliminar</ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar mode="ios" class="botones-footer">
+    <div style="text-align: center;">
+    <ion-button [routerLink]="['/login']">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/home']">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-button>
+    <ion-button [routerLink]="['/tarjeta']">
+      <ion-icon name="id-card-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="volverAtras()">
+      <ion-icon name="arrow-undo-outline"></ion-icon>
+    </ion-button>
+  </div>
+  </ion-toolbar>
+</ion-footer>
